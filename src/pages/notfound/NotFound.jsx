@@ -1,7 +1,12 @@
 import './NotFound.css'
+import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 
 function NotFound() {
-    return (<p>Not Found Page</p>)
+    return (
+        <PageLayout>
+            <p>Not Found Page</p>
+        </PageLayout>
+    );
 }
 
 export default NotFound;

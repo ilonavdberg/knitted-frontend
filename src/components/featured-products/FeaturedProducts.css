@@ -1,0 +1,12 @@
+.featured-products__title {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    margin: 0.5rem 4rem 1rem;
+}
+
+.featured-products__products {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 3rem;
+}

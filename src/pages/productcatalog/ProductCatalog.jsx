@@ -1,7 +1,12 @@
 import './ProductCatalog.css'
+import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 
 function ProductCatalog() {
-    return (<p>Product Catalog</p>)
+    return (
+        <PageLayout>
+            <p>HomePage</p>
+        </PageLayout>
+    );
 }
 
 export default ProductCatalog;

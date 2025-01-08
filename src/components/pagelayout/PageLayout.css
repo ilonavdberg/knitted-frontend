@@ -1,0 +1,15 @@
+.page {
+    display: flex;
+    flex-direction: column;
+
+    background-color: #F4F1F6;
+}
+
+.page__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.page__content > * {
+    padding: 1rem 2rem;
+}

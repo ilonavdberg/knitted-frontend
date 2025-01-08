@@ -1,9 +1,12 @@
 import './Product.css'
+import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 
 function Product() {
     return (
-        <p>Product Page</p>
-    )
+        <PageLayout>
+            <p>Product Page</p>
+        </PageLayout>
+    );
 }
 
 export default Product;
