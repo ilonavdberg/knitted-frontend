@@ -1,0 +1,15 @@
+.footer {
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--purplegrey);
+    padding: 1rem;
+}
+
+.footer__text {
+    margin-bottom: 0.5rem;
+}
+
+.footer__social {
+    margin-top: 1rem;
+}

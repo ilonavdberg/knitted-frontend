@@ -1,7 +1,10 @@
 import './ProductCard.css';
 
+import { Link } from 'react-router-dom';
+
 function ProductCard() {
     return (
+        <Link to="/product">
         <article className="product-card">
             <section className="product-card__shop">
                 <div className="product-card__shop-logo">
@@ -17,6 +20,7 @@ function ProductCard() {
                 <p className="product-card__product-price">€125,00</p>
             </section>
         </article>
+        </Link>
     );
 }
 

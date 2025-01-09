@@ -10,7 +10,7 @@
 .navbar__nav ul {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 1.25rem;
 
     list-style: none;
 }

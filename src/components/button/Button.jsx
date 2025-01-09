@@ -1,15 +1,20 @@
 import './Button.css'
 
-function Button({text, className}) {
-    //TODO: add onClick property
+function Button({ skin, children }) {
+    const classNames = skin ? `button--${skin}` : 'button--secondary'
+
+    function handleClick(textInput) {
+        console.log(textInput);
+    }
 
     return (
         <button
-            className={className}
-        >
-            {text}
+            className={classNames}
+            type="button"
+            onClick={() => handleClick(children)} >
+            {children}
         </button>
-    );
+    )
 }
 
 export default Button;

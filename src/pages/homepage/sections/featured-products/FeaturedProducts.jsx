@@ -1,5 +1,5 @@
 import './FeaturedProducts.css';
-import ProductCard from "../productcard/ProductCard.jsx";
+import ProductCard from "../../../../components/productcard/ProductCard.jsx";
 
 
 function FeaturedProducts() {

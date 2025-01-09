@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: flex-end;
 
-    background-image: linear-gradient(var(--purple-filter), var(--purple-filter)), url("src/assets/images/hero_section_bg.jpg");
+    background-image: linear-gradient(var(--purple-filter), var(--purple-filter)), url("../../../../assets/images/hero_section_bg.jpg");
     background-size: cover;
 
     color: white;

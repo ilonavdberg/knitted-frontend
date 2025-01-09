@@ -1,7 +1,7 @@
 .product-card {
     height: 260px;
     width: 156px;
-    background-color: #a89fbe;
+    background-color: rgba(67, 38, 107, 0.08);
     padding: 0.5rem;
     overflow: hidden;
     border-radius: 4px;
@@ -17,6 +17,7 @@
 .product-card__shop-logo {
     height: 24px;
     width: 24px;
+    flex-shrink: 0;
     overflow: hidden;
     border-radius: 50%;
 }
