@@ -1,22 +1,11 @@
-import '.ProductCatalog.css';
+import './ProductCatalog.css';
 
-function ProductCatalog() {
+function ProductCatalog({ children }) {
+    // here the state data and functions will be stored
+
     return (
-        <section>
-            <header>
-                <p>View all products</p>
-                <h1>Category</h1>
-                <nav>
-                    <ul>
-                        <li>
-                            subcategory
-                        </li>
-                        <li>
-                            subcategory
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+        <section className="product-catalog">
+            {children}
         </section>
     );
 }

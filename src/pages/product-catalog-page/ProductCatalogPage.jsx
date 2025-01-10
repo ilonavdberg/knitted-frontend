@@ -5,7 +5,11 @@ import ProductCatalog from "./sections/product-catalog/ProductCatalog.jsx";
 function ProductCatalogPage() {
     return (
         <PageLayout>
-            <ProductCatalog />
+            <ProductCatalog>
+                {/*<Menu />*/}
+                {/*<Products />*/}
+                {/*<PageSelector />*/}
+            </ProductCatalog>
         </PageLayout>
     );
 }
