@@ -7,10 +7,10 @@ function FeaturedProducts() {
         <section className="featured-products">
             <h2 className="featured-products__title">Featured products</h2>
             <div className="featured-products__products">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard variant="featured" />
+                <ProductCard variant="featured"/>
+                <ProductCard variant="featured"/>
+                <ProductCard variant="featured"/>
             </div>
         </section>
     );

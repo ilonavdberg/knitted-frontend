@@ -2,10 +2,10 @@ import './ProductCard.css';
 
 import { Link } from 'react-router-dom';
 
-function ProductCard() {
+function ProductCard({ variant = "default" }) {
     return (
         <Link to="/product">
-        <article className="product-card">
+        <article className={`product-card product-card--${variant}`}>
             <section className="product-card__shop">
                 <div className="product-card__shop-logo">
                     <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>

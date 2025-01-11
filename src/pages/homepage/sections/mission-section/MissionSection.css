@@ -3,16 +3,17 @@
     flex-direction: column;
     align-items: center;
     align-content: center;
-    padding: 2rem;
+    padding: 6rem;
     text-align: center;
 }
 
 .mission-section > * {
-    width: 540px;
+    width: 1080px;
 }
 
 .mission-section__title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 3rem;
     font-family: caveat, cursive;
     font-optical-sizing: auto;
     font-weight: 700;
@@ -23,6 +24,6 @@
 
 .mission-section__paragraph {
     font-weight: 300;
-    font-size: 0.8rem;
+    font-size: 1.6rem;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }

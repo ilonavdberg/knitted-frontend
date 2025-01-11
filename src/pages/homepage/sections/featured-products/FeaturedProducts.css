@@ -1,16 +1,17 @@
 .featured-products {
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .featured-products__title {
     text-transform: uppercase;
-    font-size: 1.25rem;
-    margin: 0 6rem 1rem;
+    font-size: 2.5rem;
+    margin: 0 12rem 1rem;
+    color: var(--darkpurple);
 }
 
 .featured-products__products {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 0 6rem;
+    margin: 0 12rem;
 }
