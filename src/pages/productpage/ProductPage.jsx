@@ -5,6 +5,8 @@ import ShopInfo from "@/components/shopinfo/ShopInfo.jsx";
 import Avatar from "@/components/avatar/Avatar.jsx";
 import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
+import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
+import {Link} from "react-router-dom";
 
 
 function ProductPage() {
@@ -12,6 +14,7 @@ function ProductPage() {
 
     return (
         <PageLayout>
+            <ProductToolbar />
             <section className="product-details">
                 <div className="product-details__info">
                     <ProductInfo
@@ -24,14 +27,15 @@ function ProductPage() {
                         price={125.00}
                     />
                     <div className="product-details__shop-info">
-                        <ShopInfo shopName={'Shop name'} rating={3} reviewCount={5}>
-                            <Avatar size={96}>
-                                <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>
-                            </Avatar>
-                        </ShopInfo>
+                        <Link to="/shop">
+                            <ShopInfo shopName={'Shop name'} rating={3} reviewCount={5}>
+                                <Avatar size={96}>
+                                    <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>
+                                </Avatar>
+                            </ShopInfo>
+                        </Link>
                         <Button skin="primary">Buy now</Button>
                     </div>
-
                 </div>
                 {/*TODO: create ImageSlider component*/}
                 <div className="product-details__image-slider">
