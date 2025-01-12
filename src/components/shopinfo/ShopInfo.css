@@ -1,0 +1,20 @@
+.shop-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.shop-info__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.shop-info__name {
+    font-size: 1.2rem;
+}
+
+.shop-info__text {
+    font-weight: 300;
+}

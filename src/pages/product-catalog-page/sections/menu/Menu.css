@@ -30,3 +30,11 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.menu__filter-options,
+.menu__sort-options {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 2rem;
+}
