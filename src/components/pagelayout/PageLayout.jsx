@@ -4,11 +4,11 @@ import Footer from "../footer/Footer.jsx";
 
 function PageLayout({ children }) {
     return (
-        <body className="page">
+        <div className="page">
             <NavBar />
             <main className="page__content">{children}</main>
             <Footer />
-        </body>
+        </div>
     );
 }
 

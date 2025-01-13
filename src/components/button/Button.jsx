@@ -1,7 +1,7 @@
 import './Button.css'
 
 function Button({ skin, children }) {
-    const classNames = skin ? `button--${skin}` : 'button--secondary'
+    const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`
 
     function handleClick(textInput) {
         console.log(textInput);

@@ -1,0 +1,22 @@
+.shop-toolbar {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 1700px;
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
+
+.shop-toolbar__title {
+    font-size: 4rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.shop-toolbar__actions {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}

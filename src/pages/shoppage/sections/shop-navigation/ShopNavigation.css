@@ -1,0 +1,20 @@
+.shop-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.shop-navigation__content-selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+}
+
+.shop-navigation__sort-and-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+}
+

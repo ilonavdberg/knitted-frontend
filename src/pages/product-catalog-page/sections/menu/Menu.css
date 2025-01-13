@@ -1,0 +1,40 @@
+.menu {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 auto;
+}
+
+.menu__product-catalog-link {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.menu__category-name {
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.menu__filters {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.menu__sort-and-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu__filter-options,
+.menu__sort-options {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 2rem;
+}

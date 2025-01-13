@@ -1,6 +1,6 @@
 .hero-section {
-    flex-basis: 350px;
-    padding: 1rem 2rem;
+    flex-basis: 700px;
+    padding: 2rem 4rem;
 
     display: flex;
     flex-direction: row;
@@ -15,12 +15,13 @@
 }
 
 .hero-section__title {
+    font-size: 3rem;
     font-weight: 320;
     text-transform: capitalize;
 }
 
 .hero-section__link {
-    font-size: 1.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
 }
 

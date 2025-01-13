@@ -1,11 +1,15 @@
-button {
+.button {
     border: none;
     border-radius: 50px;
-    padding: 0.5rem 1rem;
-    font-size: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .button--primary-inversed {
@@ -29,4 +33,15 @@ button {
     background: transparent;
     color: var(--darkpurple);
     border: 1px solid var(--darkpurple);
+}
+
+.button--transparent {
+    background: transparent;
+    color: var(--black);
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }

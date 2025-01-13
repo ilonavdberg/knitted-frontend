@@ -1,0 +1,27 @@
+.link-button {
+    font-size: 1rem;
+    list-style: none;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--black);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: transparent;
+}
+
+.link-button:hover {
+    cursor: pointer;
+}
+
+.link-button--selected {
+    color: white;
+    background: var(--darkpurple);
+}
+
+.link-button--disabled {
+    color: var(--purplegrey);
+    border: 1px solid var(--purplegrey);
+}
+
+.link-button--disabled:hover {
+    cursor: default;
+}
