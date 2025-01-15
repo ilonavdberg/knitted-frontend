@@ -2,12 +2,12 @@ import './ProductCatalogPage.css'
 
 import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 import Menu from "@/pages/product-catalog-page/sections/menu/Menu.jsx";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "@/components/productcard/ProductCard.jsx";
 import LinkButton from "@/components/linkbutton/LinkButton.jsx";
-import {useSearchParams} from "react-router-dom";
-import {buildUrl} from "@/utils/urlBuilder.js";
+import { useSearchParams } from "react-router-dom";
+import { buildUrl } from "@/utils/urlBuilder.js";
 
 function ProductCatalogPage() {
     const [products, setProducts] = useState([]);
@@ -30,6 +30,10 @@ function ProductCatalogPage() {
     function previousPage() {
         setPageNumber(prev => prev - 1);
     }
+
+    // useEffect(() => {
+    //     setSearchParams()
+    // }, [])
 
     useEffect(() => {
         async function fetchProducts() {
@@ -59,7 +63,7 @@ function ProductCatalogPage() {
 
         fetchProducts();
 
-    }, [pageNumber])
+    }, [pageNumber, searchParams])
 
     useEffect(() => {
         console.log(products);
