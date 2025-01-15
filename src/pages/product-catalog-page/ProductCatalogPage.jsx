@@ -6,26 +6,45 @@ import PageSelector from "@/components/pageselector/PageSelector.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import ProductCard from "@/components/productcard/ProductCard.jsx";
+import Button from "@/components/button/Button.jsx";
+import LinkButton from "@/components/linkbutton/LinkButton.jsx";
 
 function ProductCatalogPage() {
     // here the state data and functions will be stored
     const [products, setProducts] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
+    const [isFirstPage, setIsFirstPage] = useState(true);
+    const [isLastPage, setIsLastPage] = useState(false);
+
+    function nextPage() {
+        setPageNumber(prev => prev + 1);
+    }
+
+    function previousPage() {
+        setPageNumber(prev => prev - 1);
+    }
 
     useEffect(() => {
         async function fetchProducts() {
             try {
-                return await axios.get("http://localhost:8080/v1/items");
-                // setProducts(response.data.content);
+                const response = await axios.get("http://localhost:8080/v1/items", {
+                    params: {
+                        page: pageNumber
+                    }
+                });
+
+                setProducts(response.data.content);
+                setIsFirstPage(response.data.first);
+                setIsLastPage(response.data.last);
+                console.log(response.data);
             } catch(e) {
                 console.error(e);
             }
         }
 
-        fetchProducts().then((response) => {
-            console.log(response);
-            setProducts(response.data.content);
-        })
-    }, [])
+        fetchProducts();
+
+    }, [pageNumber])
 
     useEffect(() => {
         console.log(products);
@@ -34,8 +53,7 @@ function ProductCatalogPage() {
     return (
         <PageLayout>
             <section>
-                <Menu />
-                {/*<Products />*/}
+                <Menu/>
                 <ul className="products">
                     {products.map(product => {
                         return <ProductCard
@@ -48,7 +66,20 @@ function ProductCatalogPage() {
                         />
                     })}
                 </ul>
-                <PageSelector />
+                <div className="page-selector">
+                    <LinkButton
+                        onClick={previousPage}
+                        disabled={isFirstPage}
+                    >
+                        Previous
+                    </LinkButton>
+                    <LinkButton
+                        onClick={nextPage}
+                        disabled={isLastPage}
+                    >
+                        Next
+                    </LinkButton>
+                </div>
             </section>
         </PageLayout>
     );
