@@ -1,0 +1,12 @@
+.products {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+
+    width: 100%;
+    max-width: 1900px;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
