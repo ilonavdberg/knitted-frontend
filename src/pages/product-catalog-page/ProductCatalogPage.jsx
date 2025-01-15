@@ -15,13 +15,7 @@ function ProductCatalogPage() {
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(false);
 
-    const [searchParams, setSearchParams] = useSearchParams({
-        category: "",
-        subcategory: "",
-        price: "",
-        target: "",
-        size: ""
-    });
+    const [searchParams, setSearchParams] = useSearchParams();
 
     function nextPage() {
         setPageNumber(prev => prev + 1);
@@ -31,9 +25,6 @@ function ProductCatalogPage() {
         setPageNumber(prev => prev - 1);
     }
 
-    // useEffect(() => {
-    //     setSearchParams()
-    // }, [])
 
     useEffect(() => {
         async function fetchProducts() {
@@ -72,7 +63,10 @@ function ProductCatalogPage() {
     return (
         <PageLayout>
             <section>
-                <Menu/>
+                <Menu
+                    category={searchParams.get("category")}
+                    setSearchParams={setSearchParams}
+                />
                 <ul className="products">
                     {products.map(product => {
                         return <ProductCard
