@@ -9,9 +9,11 @@ import { useState } from "react";
 
 
 function Menu({ category, setSearchParams}) {
-    const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+    const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [targetGroup, setTargetGroup] = useState('');
+    const [size, setSize] = useState('');
 
     function updateSubcategory(subcategory) {
         setSearchParams(prev => ({
@@ -23,10 +25,23 @@ function Menu({ category, setSearchParams}) {
     }
 
     function updateFilters() {
-        setSearchParams(prev => ({
-            ...Object.fromEntries(prev),
-            price: `${minPrice},${maxPrice}`,
-        }))
+        setSearchParams(prev => {
+            const updatedParams = { ...Object.fromEntries(prev) };
+
+            if (minPrice !== '' || maxPrice !== '') {
+                updatedParams.price = `${minPrice},${maxPrice}`;
+            }
+
+            if (targetGroup) {
+                updatedParams.target = targetGroup;
+            }
+
+            if (size) {
+                updatedParams.size = size;
+            }
+
+            return updatedParams;
+        });
     }
 
     return (
@@ -82,37 +97,13 @@ function Menu({ category, setSearchParams}) {
                 </fieldset>
                 {category === "clothing" && (
                     <>
-                        {/*<fieldset>*/}
-                        {/*    <legend>Target Group</legend>*/}
-                        {/*    <label htmlFor="target-group-females">*/}
-                        {/*        <input type="radio" id="target-group-females" name="target-group"/>*/}
-                        {/*        females*/}
-                        {/*    </label>*/}
-                        {/*    <label htmlFor="target-group-males">*/}
-                        {/*        <input type="radio" id="target-group-males" name="target-group"/>*/}
-                        {/*        males*/}
-                        {/*    </label>*/}
-                        {/*    <label htmlFor="target-group-unisex">*/}
-                        {/*        <input type="radio" id="target-group-unisex" name="target-group"/>*/}
-                        {/*        unisex*/}
-                        {/*    </label>*/}
-                        {/*    <label htmlFor="target-group-kids">*/}
-                        {/*        <input type="radio" id="target-group-kids" name="target-group"/>*/}
-                        {/*        kids*/}
-                        {/*    </label>*/}
-                        {/*    <label htmlFor="target-group-babies">*/}
-                        {/*        <input type="radio" id="target-group-babies" name="target-group"/>*/}
-                        {/*        babies*/}
-                        {/*    </label>*/}
-                        {/*</fieldset>*/}
-
                         <fieldset>
                             <legend>Target Group</legend>
                             <select
-                                name="size"
-                                id="size-select"
+                                id="target-group-select"
+                                name="target-group"
+                                onChange={(e) => setTargetGroup(e.target.value)}
                             >
-                                {/*TODO: get sizes from backend*/}
                                 <option value="">-- select a target group --</option>
                                 <option value="females">females</option>
                                 <option value="males">males</option>
@@ -124,19 +115,51 @@ function Menu({ category, setSearchParams}) {
 
                         <fieldset>
                             <legend>Size</legend>
-                            <select name="size" id="size-select">
+                            <select
+                                name="size"
+                                id="size-select"
+                                onChange={(e) => setSize(e.target.value)}
+                            >
                                 {/*TODO: get sizes from backend*/}
                                 <option value="">-- select a size --</option>
+                                <option value="XS">XS</option>
                                 <option value="S">S</option>
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                                <option value="3XL">3XL</option>
+                                <option value="Kids 50">Kids 50</option>
+                                <option value="Kids 56">Kids 56</option>
+                                <option value="Kids 62">Kids 62</option>
+                                <option value="ids 68">Kids 68</option>
+                                <option value="Kids 7">Kids 74</option>
+                                <option value="Kids 80">Kids 80</option>
+                                <option value="Kids 86">Kids 86</option>
+                                <option value="Kids 92">Kids 92</option>
+                                <option value="Kids 98">Kids 98</option>
+                                <option value="Kids 104">Kids 104</option>
+                                <option value="Kids 110">Kids 110</option>
+                                <option value="Kids 116">Kids 116</option>
+                                <option value="Kids 122">Kids 122</option>
+                                <option value="Kids 128">Kids 128</option>
+                                <option value="Kids 134">Kids 134</option>
+                                <option value="Kids 140">Kids 140</option>
+                                <option value="Kids 146">Kids 146</option>
+                                <option value="Kids 152">Kids 152</option>
+                                <option value="Kids 158">Kids 158</option>
+                                <option value="Kids 164">Kids 164</option>
+                                <option value="Kids 170">Kids 170</option>
+                                <option value="Kids 152">Kids 152</option>
+                                <option value="Kids 152">Kids 152</option>
+
+
                             </select>
                         </fieldset>
                     </>
                 )}
                 <Button
-                    onClick={() => updateFilters(minPrice, maxPrice)}
+                    onClick={() => updateFilters()}
                     skin="transparent"
                 >
                     Save filters
