@@ -2,6 +2,8 @@ import './RatingStars.css';
 import {Star} from "@phosphor-icons/react";
 
 function RatingStars({ rating, size = 32 }) {
+    rating = Math.round(rating);
+
     const ratingArray = Array.from({ length: 5 }, (_, i) => i < rating);
 
     return (

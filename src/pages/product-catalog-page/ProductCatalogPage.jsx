@@ -15,6 +15,7 @@ function ProductCatalogPage() {
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(false);
 
+
     const [searchParams, setSearchParams] = useSearchParams();
 
     function nextPage() {
@@ -74,9 +75,9 @@ function ProductCatalogPage() {
                             id={product.id}
                             title={product.title}
                             price={product.price}
-                            photo={product.itemPhoto.base64Image}
+                            photo={product.itemPhoto}
                             shopName={product.shopName}
-                            shopImage={product.shopPicture.base64Image}
+                            shopImage={product.shopPicture}
                         />
                     })}
                 </ul>

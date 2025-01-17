@@ -8,26 +8,43 @@ import ReviewCard from "@/components/reviewcard/ReviewCard.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import {formatDate} from "@/utils/Formatter.js";
+import {BASE_URL} from "@/utils/urlBuilder.js";
 
 function ShopContent() {
     const { id } = useParams();
     const [products, setProducts] = useState([]);
+    const [reviews, setReviews] = useState([]);
     const [selectedContent, setSelectedContent] = useState("products");
-    
+
     useEffect(() => {
-        async function fetchProducts() {
-            try {
-                const response = await axios.get(`http://localhost:8080/v1/shops/${id}/items`)
-                setProducts(response.data.content);
-                console.log(response.data.content);
-            } catch(e) {
-                console.error(e);
+        if (selectedContent === "products") {
+            async function fetchProducts() {
+                try {
+                    const response = await axios.get(BASE_URL + `shops/${id}/items`);
+                    setProducts(response.data.content);
+                    console.log(response.data.content);
+                } catch(e) {
+                    console.error(e);
+                }
             }
+            fetchProducts();
         }
 
-        fetchProducts();
+        if (selectedContent === "reviews") {
+            async function fetchReviews() {
+                try {
+                    const response = await axios.get(BASE_URL + `shops/${id}/reviews`);
+                    setReviews(response.data.content);
+                    console.log(response.data.content);
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            fetchReviews();
+        }
 
-    }, [id], selectedContent === "products");
+    }, [id, selectedContent]);
 
     return (
         <div className="shop-content">
@@ -59,11 +76,21 @@ function ShopContent() {
                         <RatingStars rating={4}/>
                     </div>
                     <div className="shop-content__review-cards">
-                        <ReviewCard/>
-                        <ReviewCard/>
-                        <ReviewCard/>
-                        <ReviewCard/>
-                        <ReviewCard/>
+                        {reviews.map(review => {
+                            return <ReviewCard
+                                key={review.id}
+                                title={review.title}
+                                rating={review.rating}
+                                review={review.comment}
+                                date={formatDate(review.createdDate)}
+                                item={review.itemName}
+                            />
+                        })}
+                        {/*<ReviewCard/>*/}
+                        {/*<ReviewCard/>*/}
+                        {/*<ReviewCard/>*/}
+                        {/*<ReviewCard/>*/}
+                        {/*<ReviewCard/>*/}
                     </div>
                 </div>
             )}

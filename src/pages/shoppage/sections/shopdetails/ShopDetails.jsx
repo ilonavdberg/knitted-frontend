@@ -4,6 +4,7 @@ import ShopInfo from "@/components/shopinfo/ShopInfo.jsx";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {BASE_URL} from "@/utils/urlBuilder.js";
 
 function ShopDetails() {
     const { id } = useParams();
@@ -12,7 +13,7 @@ function ShopDetails() {
     useEffect(() => {
         async function fetchShop() {
             try{
-                const response = await axios.get(`http://localhost:8080/v1/shops/${id}/profile`);
+                const response = await axios.get(BASE_URL + `shops/${id}/profile`);
                 setShop(response.data);
                 console.log(response.data);
             } catch(e) {
@@ -33,7 +34,7 @@ function ShopDetails() {
             <div className="shop-details__content">
                 <ShopInfo
                     shopName={shop.name}
-                    rating={shop.averageRating}
+                    rating={4}
                     reviewCount={shop.numberOfReviews}
                 ></ShopInfo>
                 <p className="shop-details__description">{shop.description}</p>
