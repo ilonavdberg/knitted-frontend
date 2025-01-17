@@ -46,23 +46,31 @@ function Menu({ category, setSearchParams}) {
 
     return (
         <header className="menu">
-            <Link to="/product-catalog" className="menu__product-catalog-link">View all products</Link>
-            <h1 className="menu__category-name">{category}</h1>
-            <nav>
-                <ul className="menu__filters">
-                    {subcategoriesData[category].map(subcategory => {
-                        return (
-                            <LinkButton
-                                key={subcategory}
-                                onClick={() => updateSubcategory(subcategory)}
-                                selected={selectedSubcategory === subcategory}
-                            >
-                                {mapToSubcategoryUI(subcategory)}
-                            </LinkButton>
-                        )
-                    })}
-                </ul>
-            </nav>
+            {category ? (
+                <>
+                    <Link to="/product-catalog" className="menu__product-catalog-link">View all products</Link>
+                    <h1 className="menu__category-name">{category}</h1>
+                    <nav>
+                        <ul className="menu__filters">
+                            {subcategoriesData[category].map(subcategory => {
+                                return (
+                                    <LinkButton
+                                        key={subcategory}
+                                        onClick={() => updateSubcategory(subcategory)}
+                                        selected={selectedSubcategory === subcategory}
+                                    >
+                                        {mapToSubcategoryUI(subcategory)}
+                                    </LinkButton>
+                                )
+                            })}
+                        </ul>
+                    </nav>
+                </>
+            ) : (
+                <>
+                    <h1 className="menu__category-name">All products</h1>
+                </>
+            )}
             <div className="menu__sort-and-filter">
                 <Button skin="transparent">
                     <span>Sort</span>
