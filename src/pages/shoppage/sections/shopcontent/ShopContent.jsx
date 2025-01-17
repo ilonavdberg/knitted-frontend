@@ -31,33 +31,42 @@ function ShopContent() {
 
     return (
         <div className="shop-content">
-            <ShopNavigation></ShopNavigation>
-            <Button skin="primary">New Product</Button>
-            <div className="shop-content__products">
-                {products.map(product => {
-                    return <ShopProductCard
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
-                        price={product.price}
-                        status={product.status}
-                        photo={product?.photo?.base64Image}
-                    />
-                })}
-            </div>
-            <div className="shop-content__reviews">
-                <div className="shop-content__review-score">
-                    <span>4.2</span>
-                    <RatingStars rating={4} />
+            <ShopNavigation
+                changeContent={setSelectedContent}
+            />
+            {selectedContent === "products" && (
+                <>
+                    <Button skin="primary">New Product</Button>
+                    <div className="shop-content__products">
+                        {products.map(product => {
+                            return <ShopProductCard
+                                key={product.id}
+                                id={product.id}
+                                title={product.title}
+                                price={product.price}
+                                status={product.status}
+                                photo={product?.photo?.base64Image}
+                            />
+                        })}
+                    </div>
+                </>
+            )}
+
+            {selectedContent === "reviews" && (
+                <div className="shop-content__reviews">
+                    <div className="shop-content__review-score">
+                        <span>4.2</span>
+                        <RatingStars rating={4}/>
+                    </div>
+                    <div className="shop-content__review-cards">
+                        <ReviewCard/>
+                        <ReviewCard/>
+                        <ReviewCard/>
+                        <ReviewCard/>
+                        <ReviewCard/>
+                    </div>
                 </div>
-                <div className="shop-content__review-cards">
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
-                    <ReviewCard />
-                </div>
-            </div>
+            )}
         </div>
     );
 }
