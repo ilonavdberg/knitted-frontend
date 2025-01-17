@@ -29,14 +29,14 @@
 
 
 
-.product-details__image-slider {
+.product-details__image {
     height: 700px;
     width: 560px;
     overflow: hidden;
     flex-shrink: 0;
 }
 
-.product-details__image-slider img {
+.product-details__image img {
     height: 100%;
     width: 100%;
     object-fit: contain;

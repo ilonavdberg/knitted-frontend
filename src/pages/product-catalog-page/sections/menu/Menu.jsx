@@ -1,30 +1,76 @@
 import './Menu.css';
-import {Link} from "react-router-dom";
-import {FunnelSimple, SortAscending} from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
+import { FunnelSimple, SortAscending } from "@phosphor-icons/react";
 
 import Button from "@/components/button/Button.jsx";
 import LinkButton from "@/components/linkbutton/LinkButton.jsx";
+import { mapToSubcategoryUI, subcategoriesData } from "@/constants/subcategoriesData.js";
+import { useState } from "react";
 
 
-function Menu() {
+function Menu({ category, setSearchParams}) {
+    const [selectedSubcategory, setSelectedSubcategory] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [targetGroup, setTargetGroup] = useState('');
+    const [size, setSize] = useState('');
+
+    function updateSubcategory(subcategory) {
+        setSearchParams(prev => ({
+            ...Object.fromEntries(prev),
+            subcategory: subcategory,
+        }));
+
+        setSelectedSubcategory(subcategory);
+    }
+
+    function updateFilters() {
+        setSearchParams(prev => {
+            const updatedParams = { ...Object.fromEntries(prev) };
+
+            if (minPrice !== '' || maxPrice !== '') {
+                updatedParams.price = `${minPrice},${maxPrice}`;
+            }
+
+            if (targetGroup) {
+                updatedParams.target = targetGroup;
+            }
+
+            if (size) {
+                updatedParams.size = size;
+            }
+
+            return updatedParams;
+        });
+    }
+
     return (
         <header className="menu">
-            <Link to="/" className="menu__product-catalog-link">View all products</Link>
-            <h1 className="menu__category-name">Category</h1>
-            <nav>
-                <ul className="menu__filters">
-                    {/*TODO: make number of list items dependent on subcategories*/}
-                    <LinkButton to="/">Sweaters</LinkButton>
-                    <LinkButton to="/">Cardigans</LinkButton>
-                    <LinkButton to="/">Tops</LinkButton>
-                    <LinkButton to="/">Pants</LinkButton>
-                    <LinkButton to="/">Skirts</LinkButton>
-                    <LinkButton to="/">Socks</LinkButton>
-                    <LinkButton to="/">Hats & Headbands</LinkButton>
-                    <LinkButton to="/">Scarves</LinkButton>
-                    <LinkButton to="/" isSelected={true}>Gloves</LinkButton>
-                </ul>
-            </nav>
+            {category ? (
+                <>
+                    <Link to="/product-catalog" className="menu__product-catalog-link">View all products</Link>
+                    <h1 className="menu__category-name">{category}</h1>
+                    <nav>
+                        <ul className="menu__filters">
+                            {subcategoriesData[category].map(subcategory => {
+                                return (
+                                    <LinkButton
+                                        key={subcategory}
+                                        onClick={() => updateSubcategory(subcategory)}
+                                        selected={selectedSubcategory === subcategory}
+                                    >
+                                        {mapToSubcategoryUI(subcategory)}
+                                    </LinkButton>
+                                )
+                            })}
+                        </ul>
+                    </nav>
+                </>
+            ) : (
+                <>
+                    <h1 className="menu__category-name">All products</h1>
+                </>
+            )}
             <div className="menu__sort-and-filter">
                 <Button skin="transparent">
                     <span>Sort</span>
@@ -40,48 +86,92 @@ function Menu() {
                     <legend>Price</legend>
                     <label htmlFor="min-price-field">
                         From
-                        <input type="number" id="min-price-field" name="min-price"/>
+                        <input
+                            type="number"
+                            id="min-price-field"
+                            name="min-price"
+                            onChange={(e) => setMinPrice(e.target.value)}
+                        />
                     </label>
                     <label htmlFor="max-price-field">
                         To
-                        <input type="number" id="max-price-field" name="max-price"/>
+                        <input
+                            type="number"
+                            id="max-price-field"
+                            name="max-price"
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                        />
                     </label>
                 </fieldset>
-                <fieldset>
-                    <legend>Target Group</legend>
-                    <label htmlFor="target-group-females">
-                        <input type="radio" id="target-group-females" name="target-group-females"/>
-                        females
-                    </label>
-                    <label htmlFor="target-group-males">
-                        <input type="radio" id="target-group-males" name="target-group-males"/>
-                        males
-                    </label>
-                    <label htmlFor="target-group-unisex">
-                        <input type="radio" id="target-group-unisex" name="target-group-unisex"/>
-                        unisex
-                    </label>
-                    <label htmlFor="target-group-kids">
-                        <input type="radio" id="target-group-kids" name="target-group-kids"/>
-                        kids
-                    </label>
-                    <label htmlFor="target-group-babies">
-                        <input type="radio" id="target-group-babies" name="target-group-babies"/>
-                        babies
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <legend>Size</legend>
-                    <select name="size" id="size-select">
-                        {/*TODO: get sizes from backend*/}
-                        <option value="">-- select a size --</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
-                </fieldset>
-                <Button skin="transparent">Save filters</Button>
+                {category === "clothing" && (
+                    <>
+                        <fieldset>
+                            <legend>Target Group</legend>
+                            <select
+                                id="target-group-select"
+                                name="target-group"
+                                onChange={(e) => setTargetGroup(e.target.value)}
+                            >
+                                <option value="">-- select a target group --</option>
+                                <option value="females">females</option>
+                                <option value="males">males</option>
+                                <option value="unisex">unisex</option>
+                                <option value="kids">kids</option>
+                                <option value="babies">babies</option>
+                            </select>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Size</legend>
+                            <select
+                                name="size"
+                                id="size-select"
+                                onChange={(e) => setSize(e.target.value)}
+                            >
+                                {/*TODO: get sizes from backend*/}
+                                <option value="">-- select a size --</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                                <option value="3XL">3XL</option>
+                                <option value="Kids 50">Kids 50</option>
+                                <option value="Kids 56">Kids 56</option>
+                                <option value="Kids 62">Kids 62</option>
+                                <option value="ids 68">Kids 68</option>
+                                <option value="Kids 7">Kids 74</option>
+                                <option value="Kids 80">Kids 80</option>
+                                <option value="Kids 86">Kids 86</option>
+                                <option value="Kids 92">Kids 92</option>
+                                <option value="Kids 98">Kids 98</option>
+                                <option value="Kids 104">Kids 104</option>
+                                <option value="Kids 110">Kids 110</option>
+                                <option value="Kids 116">Kids 116</option>
+                                <option value="Kids 122">Kids 122</option>
+                                <option value="Kids 128">Kids 128</option>
+                                <option value="Kids 134">Kids 134</option>
+                                <option value="Kids 140">Kids 140</option>
+                                <option value="Kids 146">Kids 146</option>
+                                <option value="Kids 152">Kids 152</option>
+                                <option value="Kids 158">Kids 158</option>
+                                <option value="Kids 164">Kids 164</option>
+                                <option value="Kids 170">Kids 170</option>
+                                <option value="Kids 152">Kids 152</option>
+                                <option value="Kids 152">Kids 152</option>
+
+
+                            </select>
+                        </fieldset>
+                    </>
+                )}
+                <Button
+                    onClick={() => updateFilters()}
+                    skin="transparent"
+                >
+                    Save filters
+                </Button>
             </form>
             <form className="menu__sort-options" action="">
                 <fieldset>

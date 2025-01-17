@@ -1,20 +1,42 @@
 import './ShopDetails.css';
 import Avatar from "@/components/avatar/Avatar.jsx";
 import ShopInfo from "@/components/shopinfo/ShopInfo.jsx";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function ShopDetails() {
+    const { id } = useParams();
+    const [shop, setShop] = useState({});
+
+    useEffect(() => {
+        async function fetchShop() {
+            try{
+                const response = await axios.get(`http://localhost:8080/v1/shops/${id}/profile`);
+                setShop(response.data);
+                console.log(response.data);
+            } catch(e) {
+                console.error(e);
+            }
+        }
+
+        fetchShop();
+
+    }, [])
+
+
     return (
         <div className="shop-details">
             <Avatar size={220}>
-                <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>
+                <img src={`data:image/jpg;base64,${shop?.shopPicture?.base64Image}`} alt="shop logo"/>
             </Avatar>
             <div className="shop-details__content">
                 <ShopInfo
-                    shopName={'Knitting Handmade'}
-                    rating={4}
-                    reviewCount={5}
+                    shopName={shop.name}
+                    rating={shop.averageRating}
+                    reviewCount={shop.numberOfReviews}
                 ></ShopInfo>
-                <p className="shop-details__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec iaculis tellus. Nam ac purus aliquam, tincidunt libero ut, molestie dui. Nullam lacinia libero at risus sodales, nec hendrerit turpis aliquam. Pellentesque vehicula hendrerit tortor, non pharetra nisl rhoncus vel. Nam imperdiet scelerisque ligula eget auctor. Duis elit risus, molestie quis metus nec, tincidunt malesuada leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut gravida velit non elit pharetra, et elementum felis porta. </p>
+                <p className="shop-details__description">{shop.description}</p>
             </div>
         </div>
     );

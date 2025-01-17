@@ -1,15 +1,13 @@
 import './LinkButton.css';
 
-import { useNavigate } from 'react-router-dom';
 
-function LinkButton({ to, isSelected=false, isDisabled = false, children }) {
-    const navigate = useNavigate();
+function LinkButton({ onClick, disabled = false, selected=false, children }) {
 
     return (
         <button
-            onClick={ () => !isDisabled && navigate({to})}
-            disabled={isDisabled}
-            className={`link-button ${isDisabled && "link-button--disabled"} ${isSelected && "link-button--selected"}`}
+            onClick={onClick}
+            disabled={disabled}
+            className={`link-button ${disabled && "link-button--disabled"} ${selected && "link-button--selected"}`}
         >
             {children}
         </button>

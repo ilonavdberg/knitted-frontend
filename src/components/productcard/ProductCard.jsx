@@ -3,22 +3,22 @@ import './ProductCard.css';
 import {Link} from 'react-router-dom';
 import Avatar from "@/components/avatar/Avatar.jsx";
 
-function ProductCard({variant = "default"}) {
+function ProductCard({id, title, price, photo, shopName, shopImage, variant = "default"}) {
     return (
-        <Link to="/product">
+        <Link to={`/product/${id}`}>
             <article className={`product-card product-card--${variant}`}>
                 <section className="product-card__shop">
                     <Avatar>
-                        <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>
+                        <img src={`data:image/jpg;base64,${shopImage}`} alt="shop logo"/>
                     </Avatar>
-                    <h4 className="product-card__shop-name">Shop name</h4>
+                    <h4 className="product-card__shop-name">{shopName}</h4>
                 </section>
                 <section className="product-card__product">
                     <div className="product-card__product-photo">
-                        <img src="src/assets/images/product_photo.png" alt="product photo"/>
+                        <img src={`data:image/png;base64,${photo}`} alt="product photo"/>
                     </div>
-                    <h3 className="product-card__product-title">Longest allowed Product title</h3>
-                    <p className="product-card__product-price">€125,00</p>
+                    <h3 className="product-card__product-title">{title}</h3>
+                    <p className="product-card__product-price">{`€${price}`}</p>
                 </section>
             </article>
         </Link>

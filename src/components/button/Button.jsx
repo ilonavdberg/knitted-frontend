@@ -1,17 +1,15 @@
 import './Button.css'
 
-function Button({ skin, children }) {
-    const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`
-
-    function handleClick(textInput) {
-        console.log(textInput);
-    }
+function Button({ onClick, disabled, skin, children }) {
+    const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`;
 
     return (
         <button
             className={classNames}
             type="button"
-            onClick={() => handleClick(children)} >
+            onClick={onClick}
+            disabled={disabled}
+        >
             {children}
         </button>
     )
