@@ -6,11 +6,35 @@ import Avatar from "@/components/avatar/Avatar.jsx";
 import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
 import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
-import {Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {BASE_URL} from "@/utils/urlBuilder.js";
+import axios from "axios";
 
 
 function ProductPage() {
     // This is where states are managed
+    const { id } = useParams();
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        // const targetUrl = BASE_URL + "/items" + id;
+        const targetUrl = "http://localhost:8080/v1/items/1"
+
+        async function fetchProductDetails() {
+            try {
+                const response = await axios.get(targetUrl);
+                setProduct(response.data);
+                console.log(response.data);
+            } catch(e) {
+                console.error(e);
+            }
+        }
+
+        fetchProductDetails();
+
+    }, [id])
+
 
     return (
         <PageLayout>
@@ -18,19 +42,15 @@ function ProductPage() {
             <section className="product-details">
                 <div className="product-details__info">
                     <ProductInfo
-                        title="Product Title"
-                        description="Lorem ipsum dolor sit amet. Vel facilis blanditiis qui blanditiis reiciendis qui repellat
-                            sint. Sit odit quasi qui vero maxime rem itaque voluptatum qui vero quaerat a odio eaque hic
-                            aliquid voluptatibus! Ut libero architecto quo dignissimos voluptas aut labore soluta. Aut
-                            obcaecati commodi ex laboriosam illum est veniam voluptatem ut quisquam sapiente. Et aperiam
-                            assumenda nam expedita cumque aut tenetur perspiciatis eos laudantium rerum."
-                        price={125.00}
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
                     />
                     <div className="product-details__shop-info">
                         <Link to="/shop">
-                            <ShopInfo shopName={'Shop name'} rating={3} reviewCount={5}>
+                            <ShopInfo shopName={product?.shop?.name} rating={product?.shop?.rating} reviewCount={product?.shop?.numberOfReviews}>
                                 <Avatar size={96}>
-                                    <img src="src/assets/images/shop_logo.jpg" alt="shop logo"/>
+                                    <img src={`data:image/jpg;base64,${product?.shop?.shopPicture?.base64Image}`} alt="shop logo"/>
                                 </Avatar>
                             </ShopInfo>
                         </Link>
@@ -38,8 +58,8 @@ function ProductPage() {
                     </div>
                 </div>
                 {/*TODO: create ImageSlider component*/}
-                <div className="product-details__image-slider">
-                    <img src="src/assets/images/product_photo.png" alt="product photo"/>
+                <div className="product-details__image">
+                    <img src={`data:image/jpg;base64,${product?.photos[0].base64Image}`} alt="product photo"/>
                 </div>
             </section>
         </PageLayout>

@@ -3,9 +3,9 @@ import './ProductCard.css';
 import {Link} from 'react-router-dom';
 import Avatar from "@/components/avatar/Avatar.jsx";
 
-function ProductCard({title, price, photo, shopName, shopImage, variant = "default"}) {
+function ProductCard({id, title, price, photo, shopName, shopImage, variant = "default"}) {
     return (
-        <Link to="/product">
+        <Link to={`/product/${id}`}>
             <article className={`product-card product-card--${variant}`}>
                 <section className="product-card__shop">
                     <Avatar>

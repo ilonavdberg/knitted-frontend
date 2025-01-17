@@ -36,6 +36,7 @@ function FeaturedProducts() {
                 {products.map(product => {
                     return <ProductCard
                         key={product.id}
+                        id={product.id}
                         title={product.title}
                         price={product.price}
                         photo={product.itemPhoto.base64Image}
