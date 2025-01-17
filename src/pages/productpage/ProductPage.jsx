@@ -13,7 +13,6 @@ import axios from "axios";
 
 
 function ProductPage() {
-    // This is where states are managed
     const { id } = useParams();
     const [product, setProduct] = useState({});
 
@@ -47,7 +46,7 @@ function ProductPage() {
                         price={product.price}
                     />
                     <div className="product-details__shop-info">
-                        <Link to="/shop">
+                        <Link to={`/shop/${product?.shop?.id}`}>
                             <ShopInfo shopName={product?.shop?.name} rating={product?.shop?.rating} reviewCount={product?.shop?.numberOfReviews}>
                                 <Avatar size={96}>
                                     <img src={`data:image/jpg;base64,${product?.shop?.shopPicture?.base64Image}`} alt="shop logo"/>
@@ -57,9 +56,8 @@ function ProductPage() {
                         <Button skin="primary">Buy now</Button>
                     </div>
                 </div>
-                {/*TODO: create ImageSlider component*/}
                 <div className="product-details__image">
-                    <img src={`data:image/jpg;base64,${product?.photos[0].base64Image}`} alt="product photo"/>
+                    <img src={`data:image/jpg;base64,${product?.photos?.[0]?.base64Image}`} alt="product photo"/>
                 </div>
             </section>
         </PageLayout>
