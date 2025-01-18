@@ -1,6 +1,6 @@
 import './NavBar.css'
 
-import {Link, NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Logo from "../logo/Logo.jsx";
 import Button from "../button/Button.jsx";
 
@@ -8,9 +8,7 @@ function NavBar() {
     //TODO: link to specific filter of product catalog
     return (
         <header className="navbar">
-            <Link to="/">
-                <Logo></Logo>
-            </Link>
+            <Logo />
             <nav className="navbar__nav">
                 <ul>
                     <li><NavLink to='/product-catalog?category=clothing' className="navbar__link" >Clothing</NavLink></li>

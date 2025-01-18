@@ -2,12 +2,22 @@ import './ShopNavigation.css';
 import Button from "@/components/button/Button.jsx";
 import {FunnelSimple, SortAscending} from "@phosphor-icons/react";
 
-function ShopNavigation() {
+function ShopNavigation({ changeContent }) {
     return (
         <nav className={"shop-navigation"}>
             <div className="shop-navigation__content-selector">
-                <Button skin="transparent">Products</Button>
-                <Button skin="transparent">Reviews</Button>
+                <Button
+                    onClick={() => changeContent("products")}
+                    skin="transparent"
+                >
+                    Products
+                </Button>
+                <Button
+                    onClick={() => changeContent("reviews")}
+                    skin="transparent"
+                >
+                    Reviews
+                </Button>
             </div>
             <div className="shop-navigation__sort-and-filter">
                 <Button skin="transparent">

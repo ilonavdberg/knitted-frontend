@@ -7,6 +7,7 @@ import ProductCatalogPage from "./pages/product-catalog-page/ProductCatalogPage.
 import NotFound from "./pages/notfound/NotFound.jsx";
 import ProductPage from "@/pages/productpage/ProductPage.jsx";
 import ShopPage from "@/pages/shoppage/ShopPage.jsx";
+import OrderConfirmationPage from "@/pages/order-confirmation-page/OrderConfirmationPage.jsx";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/shop/:id" element={<ShopPage />} />
             <Route path="/shop" element={<ShopPage />} />
+            <Route path="/confirmation/order/:id" element={<OrderConfirmationPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     </>

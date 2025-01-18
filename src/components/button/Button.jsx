@@ -1,6 +1,6 @@
 import './Button.css'
 
-function Button({ onClick, disabled, skin, children }) {
+function Button({ onClick, disabled=false, skin, children }) {
     const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`;
 
     return (

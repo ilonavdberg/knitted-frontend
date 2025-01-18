@@ -5,10 +5,16 @@
 }
 
 .page__content {
+    flex-basis: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .page__content > * {
     padding: 1rem 3rem;
+}
+
+.footer__logo {
+    align-self: center;
 }

@@ -39,9 +39,9 @@ function FeaturedProducts() {
                         id={product.id}
                         title={product.title}
                         price={product.price}
-                        photo={product.itemPhoto.base64Image}
+                        photo={product.itemPhoto}
                         shopName={product.shopName}
-                        shopImage={product.shopPicture.base64Image}
+                        shopImage={product.shopPicture}
                         variant="featured"
                     />;
                 })}

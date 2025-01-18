@@ -1,4 +1,4 @@
-import './PageLayout.css'
+import './PageLayout.css';
 import NavBar from "../navbar/NavBar.jsx";
 import Footer from "../footer/Footer.jsx";
 
