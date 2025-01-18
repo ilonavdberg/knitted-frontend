@@ -6,7 +6,7 @@ import Avatar from "@/components/avatar/Avatar.jsx";
 import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
 import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
-import { useParams, Link } from "react-router-dom";
+import {useParams, Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {BASE_URL} from "@/utils/urlBuilder.js";
 import axios from "axios";
@@ -14,6 +14,7 @@ import * as ImageUtils from "@/utils/ImageUtils.js";
 
 
 function ProductPage() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
 
@@ -34,6 +35,22 @@ function ProductPage() {
 
     }, [id])
 
+    async function handleOrderProduct() {
+
+        try {
+            const response = await axios.post(BASE_URL + `items/${id}/order`)
+            console.log(response.data);
+
+            if (response.status === 201) {
+                console.log("Order created");
+                navigate(`/confirmation/order/${response.data.id}`);
+            }
+
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
 
     return (
         <PageLayout>
@@ -53,7 +70,12 @@ function ProductPage() {
                                 </Avatar>
                             </ShopInfo>
                         </Link>
-                        <Button skin="primary">Buy now</Button>
+                        <Button
+                            onClick={handleOrderProduct}
+                            skin="primary"
+                        >
+                            Buy now
+                        </Button>
                     </div>
                 </div>
                 <div className="product-details__image">
