@@ -8,10 +8,10 @@ import ReviewCard from "@/components/reviewcard/ReviewCard.jsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
-import {formatDate} from "@/utils/Formatter.js";
+import {formatDate, formatRating} from "@/utils/Formatter.js";
 import {BASE_URL} from "@/utils/urlBuilder.js";
 
-function ShopContent() {
+function ShopContent({ shop }) {
     const { id } = useParams();
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -51,6 +51,7 @@ function ShopContent() {
             <ShopNavigation
                 changeContent={setSelectedContent}
             />
+
             {selectedContent === "products" && (
                 <>
                     <Button skin="primary">New Product</Button>
@@ -72,8 +73,8 @@ function ShopContent() {
             {selectedContent === "reviews" && (
                 <div className="shop-content__reviews">
                     <div className="shop-content__review-score">
-                        <span>4.2</span>
-                        <RatingStars rating={4}/>
+                        <span>{formatRating(shop.averageRating)}</span>
+                        <RatingStars rating={shop.averageRating}/>
                     </div>
                     <div className="shop-content__review-cards">
                         {reviews.map(review => {
@@ -86,11 +87,6 @@ function ShopContent() {
                                 item={review.itemName}
                             />
                         })}
-                        {/*<ReviewCard/>*/}
-                        {/*<ReviewCard/>*/}
-                        {/*<ReviewCard/>*/}
-                        {/*<ReviewCard/>*/}
-                        {/*<ReviewCard/>*/}
                     </div>
                 </div>
             )}

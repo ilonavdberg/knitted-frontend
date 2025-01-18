@@ -4,5 +4,15 @@ export function formatDate(dateString) {
 }
 
 export function formatPrice(price) {
+    if (!price) {
+        return '';
+    }
     return `€${price.toFixed(2)}`;
+}
+
+export function formatRating(number) {
+    if (!number) {
+        return '';
+    }
+    return number.toFixed(1);
 }
