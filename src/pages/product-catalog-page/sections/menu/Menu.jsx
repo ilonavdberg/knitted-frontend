@@ -178,6 +178,13 @@ function Menu({ category, setSearchParams}) {
                                     <option value="Kids 170">Kids 170</option>
                                     <option value="Kids 152">Kids 152</option>
                                     <option value="Kids 152">Kids 152</option>
+                                    <option value="Socks 22-24">Socks 22-24</option>
+                                    <option value="Socks 25-27">Socks 25-27</option>
+                                    <option value="Socks 28-30">Socks 28-30</option>
+                                    <option value="Socks 31-34">Socks 31-34</option>
+                                    <option value="Socks 35-38">Socks 35-38</option>
+                                    <option value="Socks 39-42">Socks 39-42</option>
+                                    <option value="Socks 43-46">Socks 43-46</option>
 
                                 </select>
                             </fieldset>

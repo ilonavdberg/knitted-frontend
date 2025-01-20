@@ -11,6 +11,10 @@
     justify-content: center;
 }
 
+.page__content--empty {
+    align-items: center;
+}
+
 .page__content > * {
     padding: 1rem 3rem;
 }
