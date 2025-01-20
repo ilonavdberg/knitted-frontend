@@ -21,14 +21,52 @@ function ProductListingForm({ shopId }) {
 
 
     async function handleFormSubmit(data) {
+        const formData = new FormData();
+
+        if (data.title) {
+            formData.append("title", data.title);
+        }
+        if (data.description) {
+            formData.append("description", data.description);
+        }
+        if (data.price) {
+            formData.append("price", data.price);
+        }
+        if (data.category) {
+            formData.append("category", category);
+        }
+        if (data.subcategory) {
+            formData.append("subcategory", data.subcategory);
+        }
+        if (data.target) {
+            formData.append("target", data.target);
+        }
+        if (data.size) {
+            formData.append("size", data.size);
+        }
+
+        Array.from(data.photos).forEach((file) => {
+            formData.append("photos", file);
+        });
+
+        console.log("This is the data in the formData object: ");
+        formData.forEach((value, key) => {
+            console.log(`${key}:`, value);
+        });
+
         try {
-            const response = await axios.post(BASE_URL + `shops/${shopId}/items`, data);
-            console.log(response.status);
+            console.log("This is the data of the 'data' object: ", data)
+            console.log(data)
+            const response = await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            });
+            console.log("Response: ", response.data);
             navigate("/shop/" + shopId);
         } catch(e) {
             console.error(e);
         }
-        console.log(data);
     }
 
     return (
@@ -73,7 +111,7 @@ function ProductListingForm({ shopId }) {
                     type="file"
                     id="product-image-upload"
                     accept="image/*"
-                    {...register("photo")}
+                    {...register("photos")}
                 />
             </label>
             <label htmlFor="product-category-field" className="product-listing__form-question">
@@ -116,7 +154,7 @@ function ProductListingForm({ shopId }) {
                         <select
                             className="product-listing__form-select"
                             id="product-target-group-field"
-                            {...register("target-group")}
+                            {...register("target")}
                         >
                             <option value="">-- Choose target group --</option>
                             <option value="females">females</option>
