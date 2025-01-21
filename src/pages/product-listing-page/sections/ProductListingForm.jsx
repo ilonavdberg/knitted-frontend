@@ -59,9 +59,6 @@ function ProductListingForm({ shopId, product }) {
         if (data.size) {
             formData.append("size", data.size);
         }
-        // if (data.photo) {
-        //     formData.append("photos", data.photo);
-        // }
 
         Array.from(data.photos).forEach((file) => {
             formData.append("photos", file);
@@ -84,6 +81,7 @@ function ProductListingForm({ shopId, product }) {
                     }
                 });
                 navigate("/shop/" + product.shop.id)
+
             // create new product
             } else {
                 await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
