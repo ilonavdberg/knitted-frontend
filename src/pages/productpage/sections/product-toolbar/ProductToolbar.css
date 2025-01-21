@@ -20,3 +20,8 @@
     flex-direction: row;
     gap: 2rem;
 }
+
+.error-message {
+    color: red;
+    margin-top: 1rem;
+}
