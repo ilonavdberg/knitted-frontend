@@ -13,29 +13,31 @@ import axios from "axios";
 import {generateImage} from "@/utils/ImageUtils.js";
 
 
-
 function ProductPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
 
-    useEffect(() => {
-        async function fetchProductDetails() {
-            try {
-                const response = await axios.get(BASE_URL + `items/${id}`);
-                setProduct(response.data);
-                console.log(response.data);
-            } catch(e) {
-                console.error(e);
-            }
+    async function fetchProductDetails() {
+        try {
+            const response = await axios.get(BASE_URL + `items/${id}`);
+            setProduct(response.data);
+            console.log(response.data);
+        } catch (e) {
+            console.error(e);
         }
+    }
 
+    // Refresh product details
+    function refreshProductDetails() {
         fetchProductDetails();
+    }
 
-    }, [id])
+    useEffect(() => {
+        fetchProductDetails();
+    }, [id]);
 
     async function handleOrderProduct() {
-
         try {
             const response = await axios.post(BASE_URL + `items/${id}/order`)
             console.log(response.data);
@@ -55,6 +57,7 @@ function ProductPage() {
         <PageLayout>
             <ProductToolbar
                 product={product}
+                refresh={refreshProductDetails}
             />
             <section className="product-details">
                 <div className="product-details__info">

@@ -5,7 +5,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {BASE_URL} from "@/utils/UrlBuilder.js";
 
-function ProductToolbar({ product }) {
+function ProductToolbar({ product, refresh }) {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ function ProductToolbar({ product }) {
     async function handleUnpublishProduct() {
         try {
             await axios.put(BASE_URL + `items/${id}/unpublish`);
+            refresh();
         } catch(e) {
             console.error(e);
         }
