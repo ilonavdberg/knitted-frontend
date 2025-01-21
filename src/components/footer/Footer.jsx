@@ -10,8 +10,8 @@ function Footer() {
                 for the Full-Stack Developer bootcamp at NOVI Hogeschool</p>
             <p className="footer__text">Find out more about me here:</p>
             <div className="footer__social">
-                <GithubLogo height="28px" width="42px"/>
-                <LinkedInLogo height="40px" width="42px"/>
+                <a href="https://github.com/ilonavdberg" target="_blank"><GithubLogo height="28px" width="42px"/></a>
+                <a href="https://www.linkedin.com/in/ilona-van-den-berg/" target="_blank"><LinkedInLogo height="40px" width="42px"/></a>
             </div>
         </footer>
     );

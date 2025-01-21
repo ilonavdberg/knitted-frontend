@@ -1,0 +1,10 @@
+.page__title {
+    font-size: 4rem;
+    color: var(--darkpurple);
+    margin-bottom: 1.5rem;
+}
+
+.product-listing__button {
+    margin-top: 1rem;
+    align-self: center;
+}

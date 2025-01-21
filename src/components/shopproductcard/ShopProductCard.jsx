@@ -1,6 +1,7 @@
 import './ShopProductCard.css';
 import {Link} from "react-router-dom";
 import {formatPrice} from "@/utils/Formatter.js";
+import {generateImage} from "@/utils/ImageUtils.js";
 
 
 function ShopProductCard({ id, title, price, status, photo }) {
@@ -12,7 +13,7 @@ function ShopProductCard({ id, title, price, status, photo }) {
                         <p>{status}</p>
                     </div>
                     <div className="shop-product-card__product-photo">
-                        <img src={`data:image/png;base64,${photo}`} alt="product photo"/>
+                        <img src={generateImage(photo.base64Image, generateImage(photo.extension))} alt=""/>
                     </div>
                     <h3 className="shop-product-card__product-title">{title}</h3>
                     <p className="shop-product-card__product-price">{formatPrice(price)}</p>

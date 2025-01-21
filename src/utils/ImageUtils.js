@@ -7,5 +7,8 @@ export function generateImage(base64Image, extension) {
             return `data:image/jpeg;base64,${base64Image}`;
         case 'png':
             return `data:image/png;base64,${base64Image}`;
+        default:
+            //dirty bug fix: png not recognized in the switch; so I've added this at the end
+            return `data:image/png;base64,${base64Image}`;
     }
 }
