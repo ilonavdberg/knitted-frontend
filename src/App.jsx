@@ -10,6 +10,7 @@ import ShopPage from "@/pages/shoppage/ShopPage.jsx";
 import OrderConfirmationPage from "@/pages/order-confirmation-page/OrderConfirmationPage.jsx";
 import ProductListingPage from "@/pages/product-listing-page/ProductListingPage.jsx";
 import UserRegistrationPage from "@/pages/user-registration-page/UserRegistrationPage.jsx";
+import ShopRegistrationPage from "@/pages/shop-registration-page/ShopRegistrationPage.jsx";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/confirmation/order/:id" element={<OrderConfirmationPage />} />
             <Route path="/user/register" element={<UserRegistrationPage />}/>
+            <Route path="/user/:id/shop/register" element={<ShopRegistrationPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     </>
