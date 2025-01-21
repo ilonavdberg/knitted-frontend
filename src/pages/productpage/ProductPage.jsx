@@ -20,11 +20,9 @@ function ProductPage() {
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        const targetUrl = BASE_URL + `items/${id}`;
-
         async function fetchProductDetails() {
             try {
-                const response = await axios.get(targetUrl);
+                const response = await axios.get(BASE_URL + `items/${id}`);
                 setProduct(response.data);
                 console.log(response.data);
             } catch(e) {
@@ -34,7 +32,7 @@ function ProductPage() {
 
         fetchProductDetails();
 
-    }, [id])
+    }, [id, product])
 
     async function handleOrderProduct() {
 
@@ -55,7 +53,9 @@ function ProductPage() {
 
     return (
         <PageLayout>
-            <ProductToolbar />
+            <ProductToolbar
+                product={product}
+            />
             <section className="product-details">
                 <div className="product-details__info">
                     <ProductInfo
@@ -80,7 +80,12 @@ function ProductPage() {
                     </div>
                 </div>
                 <div className="product-details__image">
-                    <img src={generateImage(product?.photos?.[0]?.base64Image, product?.photos?.[0]?.extension)} alt="product photo"/>
+                    <img src={generateImage(
+                        product?.photos?.[product?.photos?.length - 1]?.base64Image,
+                        product?.photos?.[product?.photos?.length - 1]?.extension
+                    )}
+                         alt="product photo"
+                    />
                 </div>
             </section>
         </PageLayout>

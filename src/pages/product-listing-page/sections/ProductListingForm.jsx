@@ -6,10 +6,11 @@ import Button from "@/components/button/Button.jsx";
 import axios from "axios";
 import {BASE_URL} from "@/utils/UrlBuilder.js";
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 
-function ProductListingForm({ shopId }) {
-    const { register, handleSubmit, watch } = useForm({
+function ProductListingForm({ shopId, product }) {
+    const { register, handleSubmit, watch, setValue } = useForm({
         defaultValues: {
             category: "",
         }
@@ -18,6 +19,20 @@ function ProductListingForm({ shopId }) {
 
     const category = watch('category');
     const subcategories = category ? subcategoriesData[category] : [];
+
+    useEffect(() => {
+        console.log("Received product: ", product)
+        if (product) {
+            setValue('title', product.title);
+            setValue('description', product.description);
+            setValue('price', product.price);
+            setValue('category', product.category);
+            setValue('subcategory', product.subcategory);
+            setValue('target', product.target);
+            setValue('size', product.size);
+            setValue('photos', product.photo);
+        }
+    }, [product, setValue]);
 
 
     async function handleFormSubmit(data) {
@@ -44,6 +59,9 @@ function ProductListingForm({ shopId }) {
         if (data.size) {
             formData.append("size", data.size);
         }
+        // if (data.photo) {
+        //     formData.append("photos", data.photo);
+        // }
 
         Array.from(data.photos).forEach((file) => {
             formData.append("photos", file);
@@ -55,15 +73,26 @@ function ProductListingForm({ shopId }) {
         });
 
         try {
-            console.log("This is the data of the 'data' object: ", data)
-            console.log(data)
-            const response = await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                }
-            });
-            console.log("Response: ", response.data);
-            navigate("/shop/" + shopId);
+            // update product
+            if (!shopId) {
+                formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                });
+                await axios.put(`${BASE_URL}items/${product.id}`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                });
+                navigate("/shop/" + product.shop.id)
+            // create new product
+            } else {
+                await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                });
+                navigate("/shop/" + shopId);
+            }
         } catch(e) {
             console.error(e);
         }
@@ -213,11 +242,18 @@ function ProductListingForm({ shopId }) {
                     </label>
                 </>
             )}
-            <div className="product-listing__button">
+            <div className="product-listing__buttons">
                 <Button
                     onClick={handleSubmit(handleFormSubmit)}
                     skin="primary"
-                >Save product
+                >
+                    Save product
+                </Button>
+                <Button
+                    onClick={() => {navigate(-1)}}
+                    skin="secondary"
+                >
+                    Cancel
                 </Button>
             </div>
         </form>

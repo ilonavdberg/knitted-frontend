@@ -41,3 +41,10 @@
     padding: 0.25rem;
 }
 
+.product-listing__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+}
+
