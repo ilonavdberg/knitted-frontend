@@ -32,7 +32,7 @@ function ProductPage() {
 
         fetchProductDetails();
 
-    }, [id, product])
+    }, [id])
 
     async function handleOrderProduct() {
 
