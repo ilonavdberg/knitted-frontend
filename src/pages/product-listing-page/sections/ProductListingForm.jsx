@@ -104,7 +104,6 @@ function ProductListingForm({ shopId, product }) {
                     className="product-listing__form-input"
                     id="product-title-field"
                     type="text"
-                    size={30}
                     maxLength={30}
                     {...register("title")}
                 />
