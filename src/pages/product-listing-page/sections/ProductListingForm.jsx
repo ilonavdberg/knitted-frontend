@@ -35,7 +35,7 @@ function ProductListingForm({ shopId, product }) {
     }, [product, setValue]);
 
 
-    async function handleFormSubmit(data) {
+    async function handleProductListing(data) {
         const formData = new FormData();
 
         if (data.title) {
@@ -241,7 +241,7 @@ function ProductListingForm({ shopId, product }) {
             )}
             <div className="product-listing__buttons">
                 <Button
-                    onClick={handleSubmit(handleFormSubmit)}
+                    onClick={handleSubmit(handleProductListing)}
                     skin="primary"
                 >
                     Save product

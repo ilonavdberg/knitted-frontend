@@ -1,11 +1,12 @@
 import './NavBar.css'
 
-import { NavLink } from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import Logo from "../logo/Logo.jsx";
 import Button from "../button/Button.jsx";
 
 function NavBar() {
-    //TODO: link to specific filter of product catalog
+    const navigate = useNavigate();
+
     return (
         <header className="navbar">
             <Logo />
@@ -17,8 +18,11 @@ function NavBar() {
                     <li><NavLink to='/product-catalog?category=toys' className="navbar__link" >Toys</NavLink></li>
                 </ul>
             </nav>
-            <Button skin="secondary">
-                Login
+            <Button
+                onClick={() => navigate('/user/login')}
+                skin="secondary"
+            >
+                Login | Register
             </Button>
         </header>
     );
