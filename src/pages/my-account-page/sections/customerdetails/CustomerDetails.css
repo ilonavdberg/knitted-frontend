@@ -1,0 +1,33 @@
+.customer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    max-width: 1700px;
+    width: 100%;
+    margin: 1rem auto;
+    padding: 0 2rem;
+}
+
+.customer-details__title {
+    font-size: 2rem;
+}
+
+.customer-details__address > * {
+    margin-bottom: 0.25rem;
+}
+
+.customer-details__contact-title {
+    font-size: 1.5rem;
+}
+
+.customer-details__contact > * {
+    margin-bottom: 0.25rem;
+}
+
+.customer-details__contact-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}

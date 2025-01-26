@@ -12,7 +12,7 @@ function UserRegistrationForm() {
     async function handleUserRegistration(data) {
         try {
             await axios.post(`${BASE_URL}auth/register`, data);
-            navigate("/user/login");
+            navigate("/user/login", { state: { from: location.pathname } });
         } catch(e) {
             console.error("Error during user registration: ", e);
         }

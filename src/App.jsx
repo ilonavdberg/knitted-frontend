@@ -12,6 +12,7 @@ import ProductListingPage from "@/pages/product-listing-page/ProductListingPage.
 import UserRegistrationPage from "@/pages/user-registration-page/UserRegistrationPage.jsx";
 import ShopRegistrationPage from "@/pages/shop-registration-page/ShopRegistrationPage.jsx";
 import LoginPage from "@/pages/loginpage/LoginPage.jsx";
+import MyAccountPage from "@/pages/my-account-page/MyAccountPage.jsx";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/confirmation/order/:id" element={<OrderConfirmationPage />} />
             <Route path="/user/register" element={<UserRegistrationPage />}/>
             <Route path="/user/login" element={<LoginPage />} />
+            <Route path="/user/account" element={<MyAccountPage />} />
             <Route path="/user/shop/register" element={<ShopRegistrationPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
