@@ -23,7 +23,7 @@ function AuthContextProvider({ children }) {
         } else {
             logout();
         }
-    }, [logout])
+    }, [])
 
     function login(token) {
         localStorage.setItem("token", token)
@@ -73,7 +73,8 @@ function AuthContextProvider({ children }) {
 
     return (
         <AuthContext.Provider value={contextData}>
-            {auth.status === "done" ? children : <p>Loading...</p>}
+            {children}
+            {/*{auth.status === "done" ? children : <p>Loading...</p>}*/}
         </AuthContext.Provider>
     )
 }
