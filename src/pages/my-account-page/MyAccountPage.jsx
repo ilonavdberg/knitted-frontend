@@ -29,6 +29,7 @@ function MyAccountPage() {
 
     return (
         <PageLayout>
+            {console.log(customer)}
             <AccountHeader />
             <CustomerDetails />
             <OrderHistory />
