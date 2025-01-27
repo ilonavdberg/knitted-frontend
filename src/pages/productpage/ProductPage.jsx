@@ -41,7 +41,12 @@ function ProductPage() {
 
     async function handleOrderProduct() {
         try {
-            const response = await axios.post(BASE_URL + `items/${id}/order`)
+            const response = await axios.post(BASE_URL + `items/${id}/order`, {},{
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            })
             console.log(response.data);
 
             if (response.status === 201) {

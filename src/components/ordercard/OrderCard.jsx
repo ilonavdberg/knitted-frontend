@@ -2,6 +2,7 @@ import './OrderCard.css';
 import Button from "@/components/button/Button.jsx";
 import {formatPrice} from "@/utils/Formatter.js";
 import {useNavigate} from "react-router-dom";
+import * as ImageUtils from "@/utils/ImageUtils.js";
 
 
 function OrderCard({ id, date, productName, productPhoto, price, shopName }) {
@@ -18,7 +19,7 @@ function OrderCard({ id, date, productName, productPhoto, price, shopName }) {
             </header>
             <section className="order-card__content">
                 <div className="order-card__product-photo">
-                    <img src={productPhoto} alt=""/>
+                    <img src={ImageUtils.generateImage(productPhoto?.base64Image, productPhoto?.extension)} alt="product photo"/>
                 </div>
                 <div className="order-card__product-details">
                     <p>{productName}</p>

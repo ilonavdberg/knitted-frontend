@@ -45,7 +45,7 @@ function ProductCatalogPage() {
                 setProducts(response.data.content);
                 setIsFirstPage(response.data.first);
                 setIsLastPage(response.data.last);
-                console.log(response.data);
+                console.log(response);
             } catch(e) {
                 console.error(e);
             }

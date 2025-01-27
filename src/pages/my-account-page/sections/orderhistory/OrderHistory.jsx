@@ -10,7 +10,7 @@ function OrderHistory({ orders }) {
         <section className="order-history">
             <h2 className="order-history__title">Order History</h2>
             {orders.length > 0 ? (
-                <div>
+                <ul>
                     {orders.map(order => {
                         return <OrderCard
                             key={order.id}
@@ -22,7 +22,7 @@ function OrderHistory({ orders }) {
                             shopName={order.soldItem.shopName}
                         />
                     })}
-                </div>
+                </ul>
             ) : (
                 <p>It looks like your order history is empty. Explore the marketplace to find something you&#39;ll love!</p>
             )

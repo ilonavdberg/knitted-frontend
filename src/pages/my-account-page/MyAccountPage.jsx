@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 
 function MyAccountPage() {
     const [customer, setCustomer] = useState({});
+    const [orders, setOrders] = useState({});
 
     useEffect(() => {
         async function fetchCustomerDetails() {
@@ -24,7 +25,23 @@ function MyAccountPage() {
             }
         }
         void fetchCustomerDetails();
-        console.log(customer);
+
+        async function fetchOrderHistory() {
+            try {
+                const response = await axios.get(`${BASE_URL}customer/orders`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    }
+                })
+                console.log(response.data);
+                setOrders(response.data);
+            } catch(e) {
+                console.error(e);
+            }
+        }
+        void fetchOrderHistory();
+
     }, [])
 
     return (
@@ -38,7 +55,7 @@ function MyAccountPage() {
                 customer={customer}
             />
             <OrderHistory
-                orders={customer.orders}
+                orders={orders}
             />
         </PageLayout>
     );
