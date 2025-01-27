@@ -7,16 +7,18 @@ import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
 import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
 import {useParams, Link, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {BASE_URL} from "@/utils/urlBuilder.js";
 import axios from "axios";
 import {generateImage} from "@/utils/ImageUtils.js";
+import {AuthContext} from "@/context/AuthContext.jsx";
 
 
 function ProductPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const { shop } = useContext(AuthContext);
 
     async function fetchProductDetails() {
         try {
@@ -55,10 +57,12 @@ function ProductPage() {
 
     return (
         <PageLayout>
-            <ProductToolbar
-                product={product}
-                refresh={refreshProductDetails}
-            />
+            {(product?.shop?.id === shop?.id) && (
+                <ProductToolbar
+                    product={product}
+                    refresh={refreshProductDetails}
+                />
+            )}
             <section className="product-details">
                 <div className="product-details__info">
                     <ProductInfo

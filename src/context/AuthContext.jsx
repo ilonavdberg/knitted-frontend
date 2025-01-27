@@ -66,6 +66,7 @@ function AuthContextProvider({ children }) {
     const contextData = {
         user: auth.user,
         isAuthenticated: auth.isAuthenticated,
+        shop: auth.shop,
         login: login,
         logout: logout,
         setShopId: setShopId,
