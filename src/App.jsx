@@ -13,6 +13,7 @@ import UserRegistrationPage from "@/pages/user-registration-page/UserRegistratio
 import ShopRegistrationPage from "@/pages/shop-registration-page/ShopRegistrationPage.jsx";
 import LoginPage from "@/pages/loginpage/LoginPage.jsx";
 import MyAccountPage from "@/pages/my-account-page/MyAccountPage.jsx";
+import ReviewPage from "@/pages/reviewpage/ReviewPage.jsx";
 
 function App() {
 
@@ -21,16 +22,17 @@ function App() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/product-catalog" element={<ProductCatalogPage />} />
-            <Route path="/product/:id/edit" element={<ProductListingPage />}/>
+            <Route path="/product/:id/edit" element={<ProductListingPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/shop/:shopId/new-product" element={<ProductListingPage />} />
             <Route path="/shop/:id" element={<ShopPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/confirmation/order/:id" element={<OrderConfirmationPage />} />
-            <Route path="/user/register" element={<UserRegistrationPage />}/>
+            <Route path="/user/register" element={<UserRegistrationPage />} />
             <Route path="/user/login" element={<LoginPage />} />
             <Route path="/user/account" element={<MyAccountPage />} />
             <Route path="/user/shop/register" element={<ShopRegistrationPage />} />
+            <Route path="/write-review" element={<ReviewPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     </>

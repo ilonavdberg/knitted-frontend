@@ -29,10 +29,17 @@ function MyAccountPage() {
 
     return (
         <PageLayout>
-            {console.log(customer)}
-            <AccountHeader />
-            <CustomerDetails />
-            <OrderHistory />
+            <AccountHeader
+                username={customer.username}
+                shopId={customer.shopId}
+                shopName={customer.shopName}
+            />
+            <CustomerDetails
+                customer={customer}
+            />
+            <OrderHistory
+                orders={customer.orders}
+            />
         </PageLayout>
     );
 }
