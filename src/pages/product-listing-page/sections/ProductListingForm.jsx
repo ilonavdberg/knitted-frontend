@@ -35,7 +35,7 @@ function ProductListingForm({ shopId, product }) {
     }, [product, setValue]);
 
 
-    async function handleFormSubmit(data) {
+    async function handleProductListing(data) {
         const formData = new FormData();
 
         if (data.title) {
@@ -59,9 +59,6 @@ function ProductListingForm({ shopId, product }) {
         if (data.size) {
             formData.append("size", data.size);
         }
-        // if (data.photo) {
-        //     formData.append("photos", data.photo);
-        // }
 
         Array.from(data.photos).forEach((file) => {
             formData.append("photos", file);
@@ -84,6 +81,7 @@ function ProductListingForm({ shopId, product }) {
                     }
                 });
                 navigate("/shop/" + product.shop.id)
+
             // create new product
             } else {
                 await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
@@ -106,7 +104,6 @@ function ProductListingForm({ shopId, product }) {
                     className="product-listing__form-input"
                     id="product-title-field"
                     type="text"
-                    size={30}
                     maxLength={30}
                     {...register("title")}
                 />
@@ -244,7 +241,7 @@ function ProductListingForm({ shopId, product }) {
             )}
             <div className="product-listing__buttons">
                 <Button
-                    onClick={handleSubmit(handleFormSubmit)}
+                    onClick={handleSubmit(handleProductListing)}
                     skin="primary"
                 >
                     Save product

@@ -1,0 +1,28 @@
+.shop-registration__form-subset {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1rem;
+    padding: 1rem 3rem;
+    border: 1px solid var(--darkpurple);
+    border-radius: 4px;
+}
+
+.shop-registration__form-subset-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--darkpurple);
+}
+
+.shop-registration__form-question {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.shop-registration__description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

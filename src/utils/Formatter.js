@@ -16,3 +16,7 @@ export function formatRating(number) {
     }
     return number.toFixed(1);
 }
+
+export function formatAddressToString(address) {
+    return `${address.street} ${address.houseNumber}${address.door ?? ''}, ${address.zipcode} ${address.city}`
+}
