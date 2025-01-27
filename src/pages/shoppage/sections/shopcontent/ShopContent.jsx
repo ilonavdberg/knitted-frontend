@@ -10,6 +10,7 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import {formatDate, formatRating} from "@/utils/Formatter.js";
 import {BASE_URL} from "@/utils/urlBuilder.js";
+import PageSelector from "@/components/pageselector/PageSelector.jsx";
 
 function ShopContent({ shop }) {
     const navigate = useNavigate();
@@ -17,35 +18,75 @@ function ShopContent({ shop }) {
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [selectedContent, setSelectedContent] = useState("products");
+    const [pageNumber, setPageNumber] = useState(0);
+    const [isFirstPage, setIsFirstPage] = useState(true);
+    const [isLastPage, setIsLastPage] = useState(false);
+
+    function nextPage() {
+        setPageNumber(prev => prev + 1);
+        console.log("next page");
+    }
+
+    function previousPage() {
+        setPageNumber(prev => prev - 1);
+        console.log("previous page");
+    }
+
+    async function fetchProducts() {
+        try {
+            const response = await axios.get(BASE_URL + `shops/${id}/items`, {
+                params: {
+                    page: pageNumber,
+                }
+            });
+            setProducts(response.data.content);
+            setIsFirstPage(response.data.first);
+            setIsLastPage(response.data.last);
+            console.log(response.data);
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+    async function fetchReviews() {
+        try {
+            const response = await axios.get(BASE_URL + `shops/${id}/reviews`, {
+                params: {
+                    page: pageNumber,
+                }
+            });
+            setReviews(response.data.content);
+            setIsFirstPage(response.data.first);
+            setIsLastPage(response.data.last);
+            console.log(response.data.content);
+        } catch(e) {
+            console.error(e);
+        }
+    }
 
     useEffect(() => {
+        setPageNumber(0);
+
         if (selectedContent === "products") {
-            async function fetchProducts() {
-                try {
-                    const response = await axios.get(BASE_URL + `shops/${id}/items`);
-                    setProducts(response.data.content);
-                    console.log(response.data.content);
-                } catch(e) {
-                    console.error(e);
-                }
-            }
             fetchProducts();
         }
 
         if (selectedContent === "reviews") {
-            async function fetchReviews() {
-                try {
-                    const response = await axios.get(BASE_URL + `shops/${id}/reviews`);
-                    setReviews(response.data.content);
-                    console.log(response.data.content);
-                } catch(e) {
-                    console.error(e);
-                }
-            }
             fetchReviews();
         }
 
     }, [id, selectedContent]);
+
+    useEffect(() => {
+        if (selectedContent === "products") {
+            fetchProducts();
+        }
+
+        if (selectedContent === "reviews") {
+            fetchReviews();
+        }
+
+    }, [pageNumber]);
 
     return (
         <div className="shop-content">
@@ -96,6 +137,12 @@ function ShopContent({ shop }) {
                     </div>
                 </div>
             )}
+            <PageSelector
+                isFirstPage={isFirstPage}
+                isLastPage={isLastPage}
+                previousPage={previousPage}
+                nextPage={nextPage}
+            />
         </div>
     );
 }
