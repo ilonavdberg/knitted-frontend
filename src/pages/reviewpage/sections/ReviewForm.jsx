@@ -16,7 +16,7 @@ function ReviewForm({orderId}) {
         console.log(data);
         console.log(orderId);
         try {
-            const response = await axios.post(`${BASE_URL}orders/${14}/review`, data);
+            const response = await axios.post(`${BASE_URL}orders/${orderId}/review`, data);
             console.log(response);
             navigate(-1);
         } catch(e) {

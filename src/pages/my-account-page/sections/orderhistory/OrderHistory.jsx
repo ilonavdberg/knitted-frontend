@@ -1,5 +1,6 @@
 import './OrderHistory.css';
 import OrderCard from "@/components/ordercard/OrderCard.jsx";
+import log from "eslint-plugin-react/lib/util/log.js";
 
 function OrderHistory({ orders }) {
     if (!orders) {
@@ -8,9 +9,10 @@ function OrderHistory({ orders }) {
 
     return (
         <section className="order-history">
+            {console.log(orders)}
             <h2 className="order-history__title">Order History</h2>
             {orders.length > 0 ? (
-                <ul>
+                <ul className="order-history__orders">
                     {orders.map(order => {
                         return <OrderCard
                             key={order.id}
@@ -20,6 +22,7 @@ function OrderHistory({ orders }) {
                             productPhoto={order.soldItem.itemPhoto}
                             price={order.soldItem.price}
                             shopName={order.soldItem.shopName}
+                            reviewId={order.reviewId}
                         />
                     })}
                 </ul>

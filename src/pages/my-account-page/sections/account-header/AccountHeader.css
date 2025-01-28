@@ -26,6 +26,12 @@
     margin: 1rem 0;
 }
 
+.account-header__username,
+.account-header__shopname {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
 .account-header__user > *:not(:last-child) {
     margin-bottom: 0.5rem;
 }

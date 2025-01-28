@@ -1,11 +1,11 @@
 import './OrderCard.css';
 import Button from "@/components/button/Button.jsx";
-import {formatPrice} from "@/utils/Formatter.js";
+import {formatDate, formatPrice} from "@/utils/Formatter.js";
 import {useNavigate} from "react-router-dom";
 import * as ImageUtils from "@/utils/ImageUtils.js";
 
 
-function OrderCard({ id, date, productName, productPhoto, price, shopName }) {
+function OrderCard({ id, date, productName, productPhoto, price, shopName, reviewId }) {
     const navigate = useNavigate();
 
     function handleWriteReview() {
@@ -14,26 +14,29 @@ function OrderCard({ id, date, productName, productPhoto, price, shopName }) {
 
     return (
         <article className="order-card">
+            {console.log(reviewId)}
             <header>
-                <h2 className="order-card__date">{date}</h2>
+                <h2 className="order-card__date">{formatDate(date)}</h2>
             </header>
             <section className="order-card__content">
                 <div className="order-card__product-photo">
                     <img src={ImageUtils.generateImage(productPhoto?.base64Image, productPhoto?.extension)} alt="product photo"/>
                 </div>
                 <div className="order-card__product-details">
-                    <p>{productName}</p>
+                    <h3 className="order-card__product-name">{productName}</h3>
                     <p>{shopName}</p>
                     <p>{formatPrice(price)}</p>
                 </div>
-                <div  className="order-card__review-button">
-                    <Button
-                        onClick={handleWriteReview}
-                        skin="tertiary"
-                    >
-                        Write a Review
-                    </Button>
-                </div>
+                {!reviewId && (
+                    <div className="order-card__review-button">
+                        <Button
+                            onClick={handleWriteReview}
+                            skin="tertiary"
+                        >
+                            Write a Review
+                        </Button>
+                    </div>
+                )}
             </section>
         </article>
     );

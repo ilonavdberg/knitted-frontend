@@ -39,6 +39,10 @@
     gap: 1rem;
 }
 
+.order-card__product-name {
+    font-weight: 500;
+}
+
 .order-card__review-button {
     align-self: flex-end;
 }

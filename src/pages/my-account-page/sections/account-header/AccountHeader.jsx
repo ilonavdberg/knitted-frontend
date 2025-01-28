@@ -26,8 +26,8 @@ function AccountHeader({ username, shopId, shopName }) {
                 </Button>
             </div>
             <div className="account-header__user">
-                <p>Username: {username}</p>
-                {shopName && (<p>Shop: {shopName}</p>)}
+                <p className="account-header__username">Username: {username}</p>
+                {shopName && (<p className="account-header__shopname">Shop: {shopName}</p>)}
             </div>
 
             <div>
