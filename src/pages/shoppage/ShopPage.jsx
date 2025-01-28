@@ -31,8 +31,6 @@ function ShopPage() {
 
     return (
         <PageLayout>
-            {console.log("id from url: ", id)}
-            {console.log("id from auth shop", userShop?.id)}
             {(shop?.id == userShop?.id) && (<ShopToolbar />)}
             <ShopDetails
                 shop={shop}

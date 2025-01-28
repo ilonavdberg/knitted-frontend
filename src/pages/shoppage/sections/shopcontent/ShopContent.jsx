@@ -101,7 +101,7 @@ function ShopContent({ shop }) {
                     {(shop?.id == userShop?.id) && (
                         <Button
                             skin="primary"
-                            onClick={() => navigate("new-product")}
+                            onClick={() => navigate("/shop/new-product")}
                         >
                             New Product
                         </Button>

@@ -7,7 +7,7 @@ import {BASE_URL} from "@/utils/UrlBuilder.js";
 import axios from "axios";
 
 function ProductListingPage() {
-    const { id, shopId } = useParams();
+    const { id } = useParams();
     const [product, setProduct] = useState({});
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function ProductListingPage() {
             <h1 className="page__title">
                 {id ? "Edit product" : "New product"}
             </h1>
-            <ProductListingForm shopId={shopId} product={product} />
+            <ProductListingForm product={product} productId={id}/>
         </EmptyLayout>
     );
 }

@@ -6,15 +6,17 @@ import Button from "@/components/button/Button.jsx";
 import axios from "axios";
 import {BASE_URL} from "@/utils/UrlBuilder.js";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {AuthContext} from "@/context/AuthContext.jsx";
 
 
-function ProductListingForm({ shopId, product }) {
+function ProductListingForm({ product, productId }) {
     const { register, handleSubmit, watch, setValue } = useForm({
         defaultValues: {
             category: "",
         }
     });
+    const { shop: userShop } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const category = watch('category');
@@ -22,6 +24,7 @@ function ProductListingForm({ shopId, product }) {
 
     useEffect(() => {
         console.log("Received product: ", product)
+        console.log("User shop: ", userShop);
         if (product) {
             setValue('title', product.title);
             setValue('description', product.description);
@@ -71,7 +74,7 @@ function ProductListingForm({ shopId, product }) {
 
         try {
             // update product
-            if (!shopId) {
+            if (productId) {
                 formData.forEach((value, key) => {
                     console.log(`${key}: ${value}`);
                 });
@@ -84,12 +87,12 @@ function ProductListingForm({ shopId, product }) {
 
             // create new product
             } else {
-                await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
+                await axios.post(BASE_URL + `shops/${userShop.id}/items`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     }
                 });
-                navigate("/shop/" + shopId);
+                navigate("/shop/" + userShop.id);
             }
         } catch(e) {
             console.error(e);

@@ -14,7 +14,6 @@ function OrderCard({ id, date, productName, productPhoto, price, shopName, revie
 
     return (
         <article className="order-card">
-            {console.log(reviewId)}
             <header>
                 <h2 className="order-card__date">{formatDate(date)}</h2>
             </header>
