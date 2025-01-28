@@ -63,9 +63,11 @@ function ProductListingForm({ product, productId }) {
             formData.append("size", data.size);
         }
 
-        Array.from(data.photos).forEach((file) => {
-            formData.append("photos", file);
-        });
+        if (data.photos && data.photos.length > 0) {
+            Array.from(data.photos).forEach((file) => {
+                formData.append("photos", file);
+            });
+        }
 
         console.log("This is the data in the formData object: ");
         formData.forEach((value, key) => {
@@ -78,9 +80,10 @@ function ProductListingForm({ product, productId }) {
                 formData.forEach((value, key) => {
                     console.log(`${key}: ${value}`);
                 });
-                await axios.put(`${BASE_URL}items/${product.id}`, formData, {
+                await axios.put(`${BASE_URL}items/${productId}`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
                     }
                 });
                 navigate("/shop/" + product.shop.id)
@@ -90,6 +93,7 @@ function ProductListingForm({ product, productId }) {
                 await axios.post(BASE_URL + `shops/${userShop.id}/items`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
                     }
                 });
                 navigate("/shop/" + userShop.id);
