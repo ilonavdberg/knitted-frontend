@@ -18,7 +18,7 @@ function ProductPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
-    const { shop } = useContext(AuthContext);
+    const { isAuthenticated, shop } = useContext(AuthContext);
 
     async function fetchProductDetails() {
         try {
@@ -40,23 +40,28 @@ function ProductPage() {
     }, [id]);
 
     async function handleOrderProduct() {
-        try {
-            const response = await axios.post(BASE_URL + `items/${id}/order`, {},{
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        if (isAuthenticated) {
+            try {
+                const response = await axios.post(BASE_URL + `items/${id}/order`, {},{
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    }
+                })
+                console.log(response.data);
+
+                if (response.status === 201) {
+                    console.log("Order created");
+                    navigate(`/confirmation/order/${response.data.id}`);
                 }
-            })
-            console.log(response.data);
 
-            if (response.status === 201) {
-                console.log("Order created");
-                navigate(`/confirmation/order/${response.data.id}`);
+            } catch(e) {
+                console.error(e);
             }
-
-        } catch(e) {
-            console.error(e);
+        } else {
+            navigate("/user/login");
         }
+
     }
 
 

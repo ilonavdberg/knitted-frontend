@@ -200,8 +200,8 @@ function UserRegistrationForm() {
                     </label>
                     {errors.phone && <p className="form__error-message">{errors.phone.message}</p>}
                 </div>
-
             </fieldset>
+
             <div className="user-registration__buttons">
                 <Button
                     onClick={handleSubmit(handleUserRegistration)}
