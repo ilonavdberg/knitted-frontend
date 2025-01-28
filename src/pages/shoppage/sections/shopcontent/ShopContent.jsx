@@ -5,16 +5,18 @@ import Button from "@/components/button/Button.jsx";
 import ShopProductCard from "@/components/shopproductcard/ShopProductCard.jsx";
 import RatingStars from "@/components/ratingstars/RatingStars.jsx";
 import ReviewCard from "@/components/reviewcard/ReviewCard.jsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import {formatDate, formatRating} from "@/utils/Formatter.js";
 import {BASE_URL} from "@/utils/urlBuilder.js";
 import PageSelector from "@/components/pageselector/PageSelector.jsx";
+import {AuthContext} from "@/context/AuthContext.jsx";
 
 function ShopContent({ shop }) {
     const navigate = useNavigate();
     const { id } = useParams();
+    const { shop: userShop } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [selectedContent, setSelectedContent] = useState("products");
@@ -96,12 +98,14 @@ function ShopContent({ shop }) {
 
             {selectedContent === "products" && (
                 <>
-                    <Button
-                        skin="primary"
-                        onClick={() => navigate("new-product")}
-                    >
-                        New Product
-                    </Button>
+                    {(shop?.id == userShop?.id) && (
+                        <Button
+                            skin="primary"
+                            onClick={() => navigate("new-product")}
+                        >
+                            New Product
+                        </Button>
+                    )}
                     <div className="shop-content__products">
                         {products.map(product => {
                             return <ShopProductCard

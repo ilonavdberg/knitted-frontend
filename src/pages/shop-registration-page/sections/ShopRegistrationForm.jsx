@@ -18,7 +18,7 @@ function ShopRegistrationForm() {
         if (userShop) {
             navigate(`/shop/${userShop.id}`);
         }
-    })
+    }, [userShop])
 
     async function handleShopRegistration(data) {
         console.log(userShop);

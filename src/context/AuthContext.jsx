@@ -17,17 +17,18 @@ function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const shopId = localStorage.getItem("shopId");
 
         if (token && isTokenValid(token)) {
-            login(token);
+            login(token, shopId || null);
         } else {
             logout();
         }
     }, [])
 
     function login(token, shopId = null) {
-        localStorage.removeItem("token");
         localStorage.setItem("token", token)
+        localStorage.setItem("shopId", shopId)
 
         const decodedToken = jwtDecode(token);
         console.log("Decoded token: ", decodedToken);
