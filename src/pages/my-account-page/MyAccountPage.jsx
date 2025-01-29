@@ -46,6 +46,7 @@ function MyAccountPage() {
 
     return (
         <PageLayout>
+            {console.log("token: ", localStorage.getItem("token"))}
             <AccountHeader
                 username={customer.username}
                 shopId={customer.shopId}
