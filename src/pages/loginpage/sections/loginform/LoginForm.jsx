@@ -10,16 +10,15 @@ import { AuthContext } from "@/context/AuthContext.jsx";
 function LoginForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const { isAuthenticated, login, setShopId } = useContext(AuthContext);
+    const { isAuthenticated, login } = useContext(AuthContext);
 
     async function handleUserLogin(data) {
         try {
             const response = await axios.post(`${BASE_URL}auth/login`, data);
             const token = response.headers.authorization.replace('Bearer ', '');
-            login(token);
-
-            const shopId = response.data.shopId;
-            setShopId(shopId);
+            const shopId = response.data.shopId || null;
+            console.log("shopId received from backend: ", response.data.shopId)
+            login(token, shopId);
 
         } catch(e) {
             console.error("Error during login: ", e);
@@ -29,9 +28,11 @@ function LoginForm() {
     useEffect(() => {
         // handle navigation after logging in
         if (isAuthenticated) {
-            const prevPage = location.state?.from;
+            const prevPage = localStorage.getItem("prevPage");
+            console.log("previous page: ", prevPage);
 
             if (prevPage === "/user/register") {
+                localStorage.removeItem("prevPage");
                 navigate("/");
             } else {
                 navigate(-1);

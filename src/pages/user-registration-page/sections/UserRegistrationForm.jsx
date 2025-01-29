@@ -11,8 +11,33 @@ function UserRegistrationForm() {
 
     async function handleUserRegistration(data) {
         try {
-            await axios.post(`${BASE_URL}auth/register`, data);
-            navigate("/user/login", { state: { from: location.pathname } });
+            const formData = new FormData();
+            formData.append("username", data.username);
+            formData.append("password", data.password);
+            formData.append("firstName", data.firstName);
+            formData.append("lastName", data.lastName);
+            formData.append("street", data.street);
+            formData.append("houseNumber", data.houseNumber);
+            formData.append("door", data.door);
+            formData.append("zipcode", data.zipcode);
+            formData.append("city", data.city);
+            formData.append("email", data.email);
+            formData.append("phone", data.phone);
+
+            if (data.image && data.image.length > 0) {
+                formData.append("uploadedImage", data.image[0]);
+            }
+
+            await axios.post(`${BASE_URL}auth/register`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            });
+
+            localStorage.setItem("prevPage", "/user/register");
+            navigate("/user/login");
+
+
         } catch(e) {
             console.error("Error during user registration: ", e);
         }
@@ -67,6 +92,17 @@ function UserRegistrationForm() {
                     />
                 </label>
                 {errors.password && <p className="form__error-message">{errors.password.message}</p>}
+
+                <label htmlFor="user-picture-field" className="user-registration__form-question">
+                    User picture:
+                    <input
+                        className="user-registration__upload-file"
+                        id="user-picture-field"
+                        type="file"
+                        accept="image/*"
+                        {...register("image")}
+                    />
+                </label>
 
             </fieldset>
             <fieldset className="user-registration__form-subset">
@@ -200,8 +236,8 @@ function UserRegistrationForm() {
                     </label>
                     {errors.phone && <p className="form__error-message">{errors.phone.message}</p>}
                 </div>
-
             </fieldset>
+
             <div className="user-registration__buttons">
                 <Button
                     onClick={handleSubmit(handleUserRegistration)}

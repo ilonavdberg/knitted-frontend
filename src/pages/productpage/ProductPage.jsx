@@ -7,16 +7,18 @@ import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
 import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
 import {useParams, Link, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {BASE_URL} from "@/utils/urlBuilder.js";
 import axios from "axios";
 import {generateImage} from "@/utils/ImageUtils.js";
+import {AuthContext} from "@/context/AuthContext.jsx";
 
 
 function ProductPage() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const { isAuthenticated, shop } = useContext(AuthContext);
 
     async function fetchProductDetails() {
         try {
@@ -38,27 +40,39 @@ function ProductPage() {
     }, [id]);
 
     async function handleOrderProduct() {
-        try {
-            const response = await axios.post(BASE_URL + `items/${id}/order`)
-            console.log(response.data);
+        if (isAuthenticated) {
+            try {
+                const response = await axios.post(BASE_URL + `items/${id}/order`, {},{
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    }
+                })
+                console.log(response.data);
 
-            if (response.status === 201) {
-                console.log("Order created");
-                navigate(`/confirmation/order/${response.data.id}`);
+                if (response.status === 201) {
+                    console.log("Order created");
+                    navigate(`/confirmation/order/${response.data.id}`);
+                }
+
+            } catch(e) {
+                console.error(e);
             }
-
-        } catch(e) {
-            console.error(e);
+        } else {
+            navigate("/user/login");
         }
+
     }
 
 
     return (
         <PageLayout>
-            <ProductToolbar
-                product={product}
-                refresh={refreshProductDetails}
-            />
+            {(product?.shop?.id === shop?.id) && (
+                <ProductToolbar
+                    product={product}
+                    refresh={refreshProductDetails}
+                />
+            )}
             <section className="product-details">
                 <div className="product-details__info">
                     <ProductInfo

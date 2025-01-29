@@ -1,8 +1,7 @@
 import './PageSelector.css';
 import LinkButton from "@/components/linkbutton/LinkButton.jsx";
 
-function PageSelector({ isFirstPage, isLastPage }) {
-    // TODO: maybe add hasNext and hasPrevious props (make it dumb / reusable)
+function PageSelector({ isFirstPage, isLastPage , previousPage, nextPage}) {
     return (
         <div className="page-selector">
             <LinkButton

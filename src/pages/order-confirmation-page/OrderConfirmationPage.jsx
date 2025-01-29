@@ -15,10 +15,10 @@ function OrderConfirmationPage() {
                 <p className="order-confirmation__text">Your order with number #{id} is successfully completed</p>
                 <div className="order-confirmation__actions">
                     <Button
-                        //TODO: create navigate to user order page
+                        onClick={() => navigate("/user/account")}
                         skin="primary"
                     >
-                        Go to your order page
+                        Go to your orders
                     </Button>
                     <Button
                         onClick={() => {navigate("/")}}

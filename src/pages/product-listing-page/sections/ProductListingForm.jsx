@@ -6,15 +6,17 @@ import Button from "@/components/button/Button.jsx";
 import axios from "axios";
 import {BASE_URL} from "@/utils/UrlBuilder.js";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {AuthContext} from "@/context/AuthContext.jsx";
 
 
-function ProductListingForm({ shopId, product }) {
+function ProductListingForm({ product, productId }) {
     const { register, handleSubmit, watch, setValue } = useForm({
         defaultValues: {
             category: "",
         }
     });
+    const { shop: userShop } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const category = watch('category');
@@ -22,6 +24,7 @@ function ProductListingForm({ shopId, product }) {
 
     useEffect(() => {
         console.log("Received product: ", product)
+        console.log("User shop: ", userShop);
         if (product) {
             setValue('title', product.title);
             setValue('description', product.description);
@@ -60,9 +63,11 @@ function ProductListingForm({ shopId, product }) {
             formData.append("size", data.size);
         }
 
-        Array.from(data.photos).forEach((file) => {
-            formData.append("photos", file);
-        });
+        if (data.photos && data.photos.length > 0) {
+            Array.from(data.photos).forEach((file) => {
+                formData.append("photos", file);
+            });
+        }
 
         console.log("This is the data in the formData object: ");
         formData.forEach((value, key) => {
@@ -71,25 +76,27 @@ function ProductListingForm({ shopId, product }) {
 
         try {
             // update product
-            if (!shopId) {
+            if (productId) {
                 formData.forEach((value, key) => {
                     console.log(`${key}: ${value}`);
                 });
-                await axios.put(`${BASE_URL}items/${product.id}`, formData, {
+                await axios.put(`${BASE_URL}items/${productId}`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
                     }
                 });
                 navigate("/shop/" + product.shop.id)
 
             // create new product
             } else {
-                await axios.post(BASE_URL + `shops/${shopId}/items`, formData, {
+                await axios.post(BASE_URL + `shops/${userShop.id}/items`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
                     }
                 });
-                navigate("/shop/" + shopId);
+                navigate("/shop/" + userShop.id);
             }
         } catch(e) {
             console.error(e);

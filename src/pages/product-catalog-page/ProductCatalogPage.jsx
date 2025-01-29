@@ -5,17 +5,15 @@ import Menu from "@/pages/product-catalog-page/sections/menu/Menu.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "@/components/productcard/ProductCard.jsx";
-import LinkButton from "@/components/linkbutton/LinkButton.jsx";
 import { useSearchParams } from "react-router-dom";
 import { buildUrl } from "@/utils/urlBuilder.js";
+import PageSelector from "@/components/pageselector/PageSelector.jsx";
 
 function ProductCatalogPage() {
     const [products, setProducts] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(false);
-
-
     const [searchParams, setSearchParams] = useSearchParams();
 
     function nextPage() {
@@ -47,7 +45,7 @@ function ProductCatalogPage() {
                 setProducts(response.data.content);
                 setIsFirstPage(response.data.first);
                 setIsLastPage(response.data.last);
-                console.log(response.data);
+                console.log(response);
             } catch(e) {
                 console.error(e);
             }
@@ -81,20 +79,12 @@ function ProductCatalogPage() {
                         />
                     })}
                 </ul>
-                <div className="page-selector">
-                    <LinkButton
-                        onClick={previousPage}
-                        disabled={isFirstPage}
-                    >
-                        Previous
-                    </LinkButton>
-                    <LinkButton
-                        onClick={nextPage}
-                        disabled={isLastPage}
-                    >
-                        Next
-                    </LinkButton>
-                </div>
+                <PageSelector
+                    isFirstPage={isFirstPage}
+                    isLastPage={isLastPage}
+                    previousPage={previousPage}
+                    nextPage={nextPage}
+                />
             </section>
         </PageLayout>
     );

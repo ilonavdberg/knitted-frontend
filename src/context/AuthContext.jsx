@@ -17,20 +17,21 @@ function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const shopId = localStorage.getItem("shopId");
 
         if (token && isTokenValid(token)) {
-            login(token);
+            login(token, shopId || null);
         } else {
             logout();
         }
     }, [])
 
-    function login(token) {
+    function login(token, shopId = null) {
         localStorage.setItem("token", token)
+        localStorage.setItem("shopId", shopId)
 
         const decodedToken = jwtDecode(token);
         console.log("Decoded token: ", decodedToken);
-
 
         setAuth({
             isAuthenticated: true,
@@ -38,7 +39,7 @@ function AuthContextProvider({ children }) {
                 id: decodedToken.sub,
                 roles: decodedToken.roles,
             },
-            shop: null,
+            shop: shopId ? { id: shopId } : null,
             status: "done",
         });
     }
@@ -54,21 +55,12 @@ function AuthContextProvider({ children }) {
         navigate("/");
     }
 
-    function setShopId(shopId) {
-        setAuth((prev) => ({
-            ...prev,
-            shop: {
-                id: shopId,
-            },
-        }));
-    }
-
     const contextData = {
         user: auth.user,
         isAuthenticated: auth.isAuthenticated,
+        shop: auth.shop,
         login: login,
         logout: logout,
-        setShopId: setShopId,
     }
 
     return (
