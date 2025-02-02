@@ -12,11 +12,15 @@ function ReviewForm({orderId}) {
     const navigate = useNavigate();
 
     async function handleReviewSubmit(data) {
-        //TODO: change 1 to orderId
         console.log(data);
         console.log(orderId);
         try {
-            const response = await axios.post(`${BASE_URL}orders/${orderId}/review`, data);
+            const response = await axios.post(`${BASE_URL}orders/${orderId}/review`, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             console.log(response);
             navigate(-1);
         } catch(e) {
