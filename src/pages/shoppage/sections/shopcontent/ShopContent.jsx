@@ -136,6 +136,8 @@ function ShopContent({ shop }) {
                                 review={review.comment}
                                 date={formatDate(review.createdDate)}
                                 item={review.itemName}
+                                username={review.customer.username}
+                                userPicture={review.customer.userPicture}
                             />
                         })}
                     </div>
