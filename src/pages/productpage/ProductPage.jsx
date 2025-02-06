@@ -32,11 +32,11 @@ function ProductPage() {
 
     // Refresh product details
     function refreshProductDetails() {
-        fetchProductDetails();
+        void fetchProductDetails();
     }
 
     useEffect(() => {
-        fetchProductDetails();
+        void fetchProductDetails();
     }, [id]);
 
     async function handleOrderProduct() {
@@ -67,7 +67,9 @@ function ProductPage() {
 
     return (
         <PageLayout>
-            {(product?.shop?.id === shop?.id) && (
+            {console.log("user shop id: ", shop?.id)}
+            {console.log("product shop id: ", product?.shop?.id)}
+            {(product?.shop?.id == shop?.id) && (
                 <ProductToolbar
                     product={product}
                     refresh={refreshProductDetails}

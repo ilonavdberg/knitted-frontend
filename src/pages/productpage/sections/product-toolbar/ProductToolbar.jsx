@@ -13,7 +13,11 @@ function ProductToolbar({ product, refresh }) {
 
     async function handleArchiveProduct() {
         try {
-            const response = await axios.put(BASE_URL + `items/${id}/archive`);
+            const response = await axios.put(BASE_URL + `items/${id}/archive`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             if (response.status === 200) {
                 navigate(`/shop/${response.data.shop.id}`);
             }
@@ -25,7 +29,11 @@ function ProductToolbar({ product, refresh }) {
 
     async function handlePublishProduct() {
         try {
-            const response = await axios.put(BASE_URL + `items/${id}/publish`);
+            const response = await axios.put(BASE_URL + `items/${id}/publish`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             if (response.status === 200) {
                 navigate(`/shop/${response.data.shop.id}`);
             }
@@ -37,7 +45,11 @@ function ProductToolbar({ product, refresh }) {
 
     async function handleUnpublishProduct() {
         try {
-            await axios.put(BASE_URL + `items/${id}/unpublish`);
+            await axios.put(BASE_URL + `items/${id}/unpublish`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             refresh();
         } catch(e) {
             console.error(e);
