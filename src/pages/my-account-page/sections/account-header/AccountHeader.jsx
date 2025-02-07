@@ -13,7 +13,7 @@ function AccountHeader({ username, shopId, shopName }) {
             <h1 className="account-header__title">My Account</h1>
             <div className="account-header__account-buttons">
                 <Button
-                    onClick={() => {navigate('user/account/edit')}}
+                    onClick={() => navigate("/under-construction")}
                     skin="primary"
                 >
                     Edit

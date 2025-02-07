@@ -32,6 +32,7 @@ function App() {
             <Route path="/user/login" element={<LoginPage />} />
             <Route path="/user/account" element={<MyAccountPage />} />
             <Route path="/user/shop/register" element={<ShopRegistrationPage />} />
+            <Route path="/user/shop/edit" element={<ShopRegistrationPage />} />
             <Route path="/write-review" element={<ReviewPage />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

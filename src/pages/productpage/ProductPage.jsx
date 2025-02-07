@@ -67,8 +67,6 @@ function ProductPage() {
 
     return (
         <PageLayout>
-            {console.log("user shop id: ", shop?.id)}
-            {console.log("product shop id: ", product?.shop?.id)}
             {(product?.shop?.id == shop?.id) && (
                 <ProductToolbar
                     product={product}

@@ -67,17 +67,21 @@ function ProductCatalogPage() {
                     setSearchParams={setSearchParams}
                 />
                 <ul className="products">
-                    {products.map(product => {
-                        return <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            price={product.price}
-                            photo={product.itemPhoto}
-                            shopName={product.shopName}
-                            shopImage={product.shopPicture}
-                        />
-                    })}
+                    {products.length > 0 ? (
+                        products.map(product => {
+                            return <ProductCard
+                                key={product.id}
+                                id={product.id}
+                                title={product.title}
+                                price={product.price}
+                                photo={product.itemPhoto}
+                                shopName={product.shopName}
+                                shopImage={product.shopPicture}
+                            />
+                        })
+                    ) : (
+                        <p>Oops! No matches found. Try tweaking your filters for more options!</p>
+                    )}
                 </ul>
                 <PageSelector
                     isFirstPage={isFirstPage}

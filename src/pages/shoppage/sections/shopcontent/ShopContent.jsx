@@ -123,10 +123,14 @@ function ShopContent({ shop }) {
 
             {selectedContent === "reviews" && (
                 <div className="shop-content__reviews">
-                    <div className="shop-content__review-score">
-                        <span>{formatRating(shop.averageRating)}</span>
-                        <RatingStars rating={shop.averageRating}/>
-                    </div>
+                    {reviews.length > 0 ? (
+                        <div className="shop-content__review-score">
+                            <span>{formatRating(shop.averageRating)}</span>
+                            <RatingStars rating={shop.averageRating}/>
+                        </div>
+                    ) : (
+                        <p>This shop doesn&#39;t have any reviews yet</p>
+                    )}
                     <div className="shop-content__review-cards">
                         {reviews.map(review => {
                             return <ReviewCard
