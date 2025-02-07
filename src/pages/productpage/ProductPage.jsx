@@ -1,17 +1,19 @@
 import './ProductPage.css';
 
+import axios from "axios";
+
+import { useContext, useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "@/utils/urlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+import { generateImage } from "@/utils/ImageUtils.js";
+
 import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 import ShopInfo from "@/components/shopinfo/ShopInfo.jsx";
 import Avatar from "@/components/avatar/Avatar.jsx";
 import Button from "@/components/button/Button.jsx";
 import ProductInfo from "@/pages/productpage/sections/product-info/ProductInfo.jsx";
 import ProductToolbar from "@/pages/productpage/sections/product-toolbar/ProductToolbar.jsx";
-import {useParams, Link, useNavigate} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-import {BASE_URL} from "@/utils/urlBuilder.js";
-import axios from "axios";
-import {generateImage} from "@/utils/ImageUtils.js";
-import {AuthContext} from "@/context/AuthContext.jsx";
 
 
 function ProductPage() {

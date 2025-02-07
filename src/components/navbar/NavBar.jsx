@@ -1,10 +1,12 @@
-import './NavBar.css'
+import './NavBar.css';
 
-import {NavLink, useNavigate} from 'react-router-dom';
+import { useContext } from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import Logo from "../logo/Logo.jsx";
 import Button from "../button/Button.jsx";
-import {useContext} from "react";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
 
 function NavBar() {
     const navigate = useNavigate();

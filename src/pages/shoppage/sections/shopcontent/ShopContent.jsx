@@ -1,17 +1,20 @@
 import './ShopContent.css';
 
+import axios from "axios";
+
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { formatDate, formatRating } from "@/utils/Formatter.js";
+import { BASE_URL } from "@/utils/urlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import ShopNavigation from "@/pages/shoppage/sections/shop-navigation/ShopNavigation.jsx";
 import Button from "@/components/button/Button.jsx";
 import ShopProductCard from "@/components/shopproductcard/ShopProductCard.jsx";
 import RatingStars from "@/components/ratingstars/RatingStars.jsx";
 import ReviewCard from "@/components/reviewcard/ReviewCard.jsx";
-import {useContext, useEffect, useState} from "react";
-import axios from "axios";
-import {useNavigate, useParams} from "react-router-dom";
-import {formatDate, formatRating} from "@/utils/Formatter.js";
-import {BASE_URL} from "@/utils/urlBuilder.js";
 import PageSelector from "@/components/pageselector/PageSelector.jsx";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
 
 function ShopContent({ shop }) {
     const navigate = useNavigate();

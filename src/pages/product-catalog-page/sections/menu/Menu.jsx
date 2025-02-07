@@ -1,11 +1,12 @@
 import './Menu.css';
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FunnelSimple, SortAscending } from "@phosphor-icons/react";
+import { mapToSubcategoryUI, subcategoriesData } from "@/constants/subcategoriesData.js";
 
 import Button from "@/components/button/Button.jsx";
 import LinkButton from "@/components/linkbutton/LinkButton.jsx";
-import { mapToSubcategoryUI, subcategoriesData } from "@/constants/subcategoriesData.js";
-import { useState } from "react";
 
 
 function Menu({ category, setSearchParams}) {

@@ -1,5 +1,7 @@
 import './RatingStars.css';
-import {Star} from "@phosphor-icons/react";
+
+import { Star } from "@phosphor-icons/react";
+
 
 function RatingStars({ rating, size = 32 }) {
     rating = Math.round(rating);

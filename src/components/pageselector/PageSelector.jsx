@@ -1,5 +1,7 @@
 import './PageSelector.css';
+
 import LinkButton from "@/components/linkbutton/LinkButton.jsx";
+
 
 function PageSelector({ isFirstPage, isLastPage , previousPage, nextPage}) {
     return (

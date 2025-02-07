@@ -1,31 +1,19 @@
 import './ProductToolbar.css';
-import Button from "@/components/button/Button.jsx";
-import {Trash} from "@phosphor-icons/react";
-import {useNavigate, useParams} from "react-router-dom";
+
 import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
+
 import {useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Trash} from "@phosphor-icons/react";
+import {BASE_URL} from "@/utils/UrlBuilder.js";
+
+import Button from "@/components/button/Button.jsx";
+
 
 function ProductToolbar({ product, refresh }) {
     const { id } = useParams();
     const navigate = useNavigate();
     const [error, setError] = useState("");
-
-    async function handleArchiveProduct() {
-        try {
-            const response = await axios.put(BASE_URL + `items/${id}/archive`, {}, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                }
-            });
-            if (response.status === 200) {
-                navigate(`/shop/${response.data.shop.id}`);
-            }
-            console.log(response.data);
-        } catch(e) {
-            console.error(e);
-        }
-    }
 
     async function handlePublishProduct() {
         try {
@@ -51,6 +39,22 @@ function ProductToolbar({ product, refresh }) {
                 }
             });
             refresh();
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+    async function handleArchiveProduct() {
+        try {
+            const response = await axios.put(BASE_URL + `items/${id}/archive`, {}, {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
+            if (response.status === 200) {
+                navigate(`/shop/${response.data.shop.id}`);
+            }
+            console.log(response.data);
         } catch(e) {
             console.error(e);
         }

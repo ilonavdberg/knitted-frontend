@@ -1,5 +1,7 @@
 import './ShopInfo.css';
+
 import RatingStars from "@/components/ratingstars/RatingStars.jsx";
+
 
 function ShopInfo({ shopName, rating, reviewCount, children }) {
     return (

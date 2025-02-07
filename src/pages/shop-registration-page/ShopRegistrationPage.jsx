@@ -1,6 +1,8 @@
 import './ShopRegistrationPage.css';
+
 import EmptyLayout from "@/components/pagelayout/EmptyLayout.jsx";
 import ShopRegistrationForm from "@/pages/shop-registration-page/sections/ShopRegistrationForm.jsx";
+
 
 function ShopRegistrationPage() {
     return (

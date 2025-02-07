@@ -1,4 +1,4 @@
-import './Button.css'
+import './Button.css';
 
 function Button({ onClick, disabled=false, skin, children }) {
     const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`;
@@ -12,7 +12,7 @@ function Button({ onClick, disabled=false, skin, children }) {
         >
             {children}
         </button>
-    )
+    );
 }
 
 export default Button;

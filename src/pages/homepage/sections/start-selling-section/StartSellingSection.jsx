@@ -1,9 +1,12 @@
 import './StartSellingSection.css';
 
+import { useNavigate } from "react-router-dom";
+
+import Button from "@/components/button/Button.jsx";
+
 import knittedSeller from '@/assets/images/knitting_seller.jpg';
 import knitting from '@/assets/images/knitting_action.jpg';
-import Button from "@/components/button/Button.jsx";
-import {useNavigate} from "react-router-dom";
+
 
 function StartSellingSection() {
     const navigate = useNavigate();

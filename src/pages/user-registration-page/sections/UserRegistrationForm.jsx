@@ -1,9 +1,13 @@
 import './UserRegistrationForm.css';
-import {useForm} from "react-hook-form";
-import Button from "@/components/button/Button.jsx";
+
 import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
-import {useNavigate} from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+
+import Button from "@/components/button/Button.jsx";
+
 
 function UserRegistrationForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();

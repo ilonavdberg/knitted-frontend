@@ -1,6 +1,8 @@
 import './UserRegistrationPage.css';
+
 import EmptyLayout from "@/components/pagelayout/EmptyLayout.jsx";
 import UserRegistrationForm from "@/pages/user-registration-page/sections/UserRegistrationForm.jsx";
+
 
 function UserRegistrationPage() {
     return (

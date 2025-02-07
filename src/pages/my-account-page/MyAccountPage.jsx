@@ -1,11 +1,15 @@
 import './MyAccountPage.css';
+
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+
 import PageLayout from "@/components/pagelayout/PageLayout.jsx";
 import AccountHeader from "@/pages/my-account-page/sections/account-header/AccountHeader.jsx";
 import CustomerDetails from "@/pages/my-account-page/sections/customerdetails/CustomerDetails.jsx";
 import OrderHistory from "@/pages/my-account-page/sections/orderhistory/OrderHistory.jsx";
-import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
-import {useEffect, useState} from "react";
+
 
 function MyAccountPage() {
     const [customer, setCustomer] = useState({});

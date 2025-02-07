@@ -1,11 +1,15 @@
 import './ShopRegistrationForm.css';
-import {useForm} from "react-hook-form";
-import Button from "@/components/button/Button.jsx";
-import {useNavigate} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
 import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
+
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
+import Button from "@/components/button/Button.jsx";
+
 
 function ShopRegistrationForm() {
     const { register, handleSubmit } = useForm();

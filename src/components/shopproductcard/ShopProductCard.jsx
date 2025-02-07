@@ -1,7 +1,8 @@
 import './ShopProductCard.css';
-import {Link} from "react-router-dom";
-import {formatPrice} from "@/utils/Formatter.js";
-import {generateImage} from "@/utils/ImageUtils.js";
+
+import { Link } from "react-router-dom";
+import { formatPrice } from "@/utils/Formatter.js";
+import { generateImage } from "@/utils/ImageUtils.js";
 
 
 function ShopProductCard({ id, title, price, status, photo }) {

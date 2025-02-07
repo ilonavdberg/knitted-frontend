@@ -1,9 +1,11 @@
 import './ProductCard.css';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { formatPrice } from "@/utils/Formatter.js";
+import { generateImage } from "@/utils/ImageUtils.js";
+
 import Avatar from "@/components/avatar/Avatar.jsx";
-import {formatPrice} from "@/utils/Formatter.js";
-import {generateImage} from "@/utils/ImageUtils.js";
+
 
 function ProductCard({id, title, price, photo, shopName, shopImage, variant = "default"}) {
     return (

@@ -1,13 +1,16 @@
-import './ProductCatalogPage.css'
+import './ProductCatalogPage.css';
+
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { buildUrl } from "@/utils/urlBuilder.js";
 
 import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 import Menu from "@/pages/product-catalog-page/sections/menu/Menu.jsx";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import ProductCard from "@/components/productcard/ProductCard.jsx";
-import { useSearchParams } from "react-router-dom";
-import { buildUrl } from "@/utils/urlBuilder.js";
 import PageSelector from "@/components/pageselector/PageSelector.jsx";
+
 
 function ProductCatalogPage() {
     const [products, setProducts] = useState([]);

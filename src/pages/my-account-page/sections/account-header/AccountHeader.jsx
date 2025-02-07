@@ -1,8 +1,11 @@
 import './AccountHeader.css';
+
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import Button from "@/components/button/Button.jsx";
-import {useContext} from "react";
-import {AuthContext} from "@/context/AuthContext.jsx";
-import {useNavigate} from "react-router-dom";
+
 
 function AccountHeader({ username, shopId, shopName }) {
     const { logout } = useContext(AuthContext);

@@ -1,7 +1,10 @@
 import './ReviewCard.css';
+
+import { generateImage } from "@/utils/ImageUtils.js";
+
 import Avatar from "@/components/avatar/Avatar.jsx";
 import RatingStars from "@/components/ratingstars/RatingStars.jsx";
-import {generateImage} from "@/utils/ImageUtils.js";
+
 
 function ReviewCard({ title, rating, review, date, item, username, userPicture}) {
     return (
