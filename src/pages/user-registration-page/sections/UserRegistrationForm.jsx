@@ -1,9 +1,13 @@
 import './UserRegistrationForm.css';
-import {useForm} from "react-hook-form";
-import Button from "@/components/button/Button.jsx";
+
 import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
-import {useNavigate} from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+
+import Button from "@/components/button/Button.jsx";
+
 
 function UserRegistrationForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -44,7 +48,7 @@ function UserRegistrationForm() {
     }
     
     return (
-        <form className="user-registration__form">
+        <form onSubmit={handleSubmit(handleUserRegistration)} className="user-registration__form">
             <fieldset className="user-registration__form-subset">
                 <legend className="user-registration__form-subset-title">User account details</legend>
                 <label htmlFor="username-field" className="user-registration__form-question">
@@ -240,7 +244,7 @@ function UserRegistrationForm() {
 
             <div className="user-registration__buttons">
                 <Button
-                    onClick={handleSubmit(handleUserRegistration)}
+                    type="submit"
                     skin="primary"
                 >
                     Register

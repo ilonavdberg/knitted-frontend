@@ -1,17 +1,20 @@
 import './ShopContent.css';
 
+import axios from "axios";
+
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { formatDate, formatRating } from "@/utils/Formatter.js";
+import { BASE_URL } from "@/utils/urlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import ShopNavigation from "@/pages/shoppage/sections/shop-navigation/ShopNavigation.jsx";
 import Button from "@/components/button/Button.jsx";
 import ShopProductCard from "@/components/shopproductcard/ShopProductCard.jsx";
 import RatingStars from "@/components/ratingstars/RatingStars.jsx";
 import ReviewCard from "@/components/reviewcard/ReviewCard.jsx";
-import {useContext, useEffect, useState} from "react";
-import axios from "axios";
-import {useNavigate, useParams} from "react-router-dom";
-import {formatDate, formatRating} from "@/utils/Formatter.js";
-import {BASE_URL} from "@/utils/urlBuilder.js";
 import PageSelector from "@/components/pageselector/PageSelector.jsx";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
 
 function ShopContent({ shop }) {
     const navigate = useNavigate();
@@ -123,10 +126,14 @@ function ShopContent({ shop }) {
 
             {selectedContent === "reviews" && (
                 <div className="shop-content__reviews">
-                    <div className="shop-content__review-score">
-                        <span>{formatRating(shop.averageRating)}</span>
-                        <RatingStars rating={shop.averageRating}/>
-                    </div>
+                    {reviews.length > 0 ? (
+                        <div className="shop-content__review-score">
+                            <span>{formatRating(shop.averageRating)}</span>
+                            <RatingStars rating={shop.averageRating}/>
+                        </div>
+                    ) : (
+                        <p>This shop doesn&#39;t have any reviews yet</p>
+                    )}
                     <div className="shop-content__review-cards">
                         {reviews.map(review => {
                             return <ReviewCard
@@ -136,6 +143,8 @@ function ShopContent({ shop }) {
                                 review={review.comment}
                                 date={formatDate(review.createdDate)}
                                 item={review.itemName}
+                                username={review.customer.username}
+                                userPicture={review.customer.userPicture}
                             />
                         })}
                     </div>

@@ -1,6 +1,8 @@
 import './CustomerDetails.css';
+
 import {EnvelopeSimple, Phone} from "@phosphor-icons/react";
 import {formatAddressToString} from "@/utils/Formatter.js";
+
 
 function CustomerDetails({ customer }) {
     if (!customer || !customer.address) {

@@ -1,6 +1,7 @@
 import './OrderHistory.css';
+
 import OrderCard from "@/components/ordercard/OrderCard.jsx";
-import log from "eslint-plugin-react/lib/util/log.js";
+
 
 function OrderHistory({ orders }) {
     if (!orders) {
@@ -28,8 +29,7 @@ function OrderHistory({ orders }) {
                 </ul>
             ) : (
                 <p>It looks like your order history is empty. Explore the marketplace to find something you&#39;ll love!</p>
-            )
-            }
+            )}
         </section>
     );
 }

@@ -1,5 +1,6 @@
 import './MissionSection.css';
 
+
 function MissionSection() {
     return (
         <section className="mission-section">

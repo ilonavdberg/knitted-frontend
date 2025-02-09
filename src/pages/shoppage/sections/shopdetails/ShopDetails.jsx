@@ -1,4 +1,5 @@
 import './ShopDetails.css';
+
 import Avatar from "@/components/avatar/Avatar.jsx";
 import ShopInfo from "@/components/shopinfo/ShopInfo.jsx";
 

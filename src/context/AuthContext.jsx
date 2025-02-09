@@ -1,7 +1,7 @@
-import {createContext, useEffect, useState} from 'react';
-import {jwtDecode} from "jwt-decode";
-import {isTokenValid} from "@/utils/Validator.js";
-import {useNavigate} from "react-router-dom";
+import { createContext, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { isTokenValid } from "@/utils/Validator.js";
 
 
 export const AuthContext = createContext({});
@@ -17,7 +17,7 @@ function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        const shopId = localStorage.getItem("shopId");
+        const shopId = localStorage.getItem("shopId")
 
         if (token && isTokenValid(token)) {
             login(token, shopId || null);
@@ -31,7 +31,6 @@ function AuthContextProvider({ children }) {
         localStorage.setItem("shopId", shopId)
 
         const decodedToken = jwtDecode(token);
-        console.log("Decoded token: ", decodedToken);
 
         setAuth({
             isAuthenticated: true,

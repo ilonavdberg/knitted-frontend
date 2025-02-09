@@ -1,14 +1,17 @@
 import './ShopPage.css';
 
+import axios from "axios";
+
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import PageLayout from "@/components/pagelayout/PageLayout.jsx";
 import ShopToolbar from "@/pages/shoppage/sections/shop-toolbar/ShopToolbar.jsx";
 import ShopDetails from "@/pages/shoppage/sections/shopdetails/ShopDetails.jsx";
 import ShopContent from "@/pages/shoppage/sections/shopcontent/ShopContent.jsx";
-import {useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
-import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
 
 function ShopPage() {
     const { id } = useParams();

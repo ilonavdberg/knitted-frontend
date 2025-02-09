@@ -1,22 +1,29 @@
 import './ReviewForm.css';
-import {Star} from "@phosphor-icons/react";
-import {useForm, Controller} from "react-hook-form";
-import Button from "@/components/button/Button.jsx";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
+
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+
+import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { Star } from "@phosphor-icons/react";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+
+import Button from "@/components/button/Button.jsx";
 
 
 function ReviewForm({orderId}) {
-    const {register, handleSubmit, control} = useForm();
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     async function handleReviewSubmit(data) {
-        //TODO: change 1 to orderId
         console.log(data);
         console.log(orderId);
         try {
-            const response = await axios.post(`${BASE_URL}orders/${orderId}/review`, data);
+            const response = await axios.post(`${BASE_URL}orders/${orderId}/review`, data, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                }
+            });
             console.log(response);
             navigate(-1);
         } catch(e) {
@@ -32,7 +39,9 @@ function ReviewForm({orderId}) {
                 <Controller
                     name="rating"
                     control={control}
-                    defaultValue={0}
+                    rules={{
+                        required: "Rating is required",
+                    }}
                     render={({ field }) => (
                         <div>
                             {[1, 2, 3, 4, 5].map((star) => (
@@ -47,6 +56,7 @@ function ReviewForm({orderId}) {
                         </div>
                     )}
                 />
+                {errors.rating && <p className="form__error-message">{errors.rating.message}</p>}
             </fieldset>
 
             <fieldset  className="review-form__subset">
@@ -57,19 +67,37 @@ function ReviewForm({orderId}) {
                     <input
                         id="review-title-field"
                         type="text"
-                        {...register("title")}
+                        {...register("title", {
+                            required: "Review title is a mandatory field",
+                            minLength: {
+                                value: 6,
+                                message: "Review title must be at least 6 characters"
+                            },
+                            maxLength: {
+                                value: 50,
+                                message: "Review title cannot exceed 50 characters"
+                            },
+                        })}
                     />
                 </label>
+                {errors.title && <p className="form__error-message">{errors.title.message}</p>}
+
                 <label className="review-form__question" htmlFor="review-comment-field">
                     Comment:
                     <textarea
                         id=""
                         cols="30"
                         rows="10"
-                        {...register("comment")}
+                        {...register("comment", {
+                            maxLength: {
+                                value: 500,
+                                message: "Review comment cannot exceed 500 characters"
+                            }
+                        })}
                     >
                     </textarea>
                 </label>
+                {errors.comment && <p className="form__error-message">{errors.comment.message}</p>}
             </fieldset>
             <div className="review-form__buttons">
                 <Button

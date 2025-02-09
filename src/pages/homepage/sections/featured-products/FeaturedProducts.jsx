@@ -1,7 +1,10 @@
 import './FeaturedProducts.css';
-import ProductCard from "../../../../components/productcard/ProductCard.jsx";
+
 import axios from "axios";
-import {useEffect, useState} from "react";
+
+import { useEffect, useState } from "react";
+
+import ProductCard from "../../../../components/productcard/ProductCard.jsx";
 
 
 function FeaturedProducts() {

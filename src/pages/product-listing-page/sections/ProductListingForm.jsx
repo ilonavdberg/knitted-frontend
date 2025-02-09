@@ -1,13 +1,15 @@
 import './ProductListingForm.css';
 
-import { useForm } from 'react-hook-form';
-import {mapToSubcategoryUI, subcategoriesData} from "@/constants/subcategoriesData.js";
-import Button from "@/components/button/Button.jsx";
 import axios from "axios";
-import {BASE_URL} from "@/utils/UrlBuilder.js";
-import {useNavigate} from "react-router-dom";
-import {useContext, useEffect} from "react";
-import {AuthContext} from "@/context/AuthContext.jsx";
+
+import { useContext, useEffect } from "react";
+import { useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "@/utils/UrlBuilder.js";
+import { AuthContext } from "@/context/AuthContext.jsx";
+import { mapToSubcategoryUI, subcategoriesData } from "@/constants/subcategoriesData.js";
+
+import Button from "@/components/button/Button.jsx";
 
 
 function ProductListingForm({ product, productId }) {
@@ -23,8 +25,6 @@ function ProductListingForm({ product, productId }) {
     const subcategories = category ? subcategoriesData[category] : [];
 
     useEffect(() => {
-        console.log("Received product: ", product)
-        console.log("User shop: ", userShop);
         if (product) {
             setValue('title', product.title);
             setValue('description', product.description);
@@ -69,7 +69,6 @@ function ProductListingForm({ product, productId }) {
             });
         }
 
-        console.log("This is the data in the formData object: ");
         formData.forEach((value, key) => {
             console.log(`${key}:`, value);
         });

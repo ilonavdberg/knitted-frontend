@@ -1,8 +1,11 @@
 import './AccountHeader.css';
+
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@/context/AuthContext.jsx";
+
 import Button from "@/components/button/Button.jsx";
-import {useContext} from "react";
-import {AuthContext} from "@/context/AuthContext.jsx";
-import {useNavigate} from "react-router-dom";
+
 
 function AccountHeader({ username, shopId, shopName }) {
     const { logout } = useContext(AuthContext);
@@ -13,7 +16,7 @@ function AccountHeader({ username, shopId, shopName }) {
             <h1 className="account-header__title">My Account</h1>
             <div className="account-header__account-buttons">
                 <Button
-                    onClick={() => {navigate('user/account/edit')}}
+                    onClick={() => navigate("/under-construction")}
                     skin="primary"
                 >
                     Edit

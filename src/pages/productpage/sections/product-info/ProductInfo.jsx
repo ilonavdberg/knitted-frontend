@@ -1,4 +1,5 @@
 import './ProductInfo.css';
+
 import * as Formatter from "@/utils/Formatter.js";
 
 function ProductInfo({ title, description, price }) {

@@ -1,13 +1,16 @@
-import './ProductCatalogPage.css'
+import './ProductCatalogPage.css';
+
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { buildUrl } from "@/utils/urlBuilder.js";
 
 import PageLayout from "../../components/pagelayout/PageLayout.jsx";
 import Menu from "@/pages/product-catalog-page/sections/menu/Menu.jsx";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import ProductCard from "@/components/productcard/ProductCard.jsx";
-import { useSearchParams } from "react-router-dom";
-import { buildUrl } from "@/utils/urlBuilder.js";
 import PageSelector from "@/components/pageselector/PageSelector.jsx";
+
 
 function ProductCatalogPage() {
     const [products, setProducts] = useState([]);
@@ -67,17 +70,21 @@ function ProductCatalogPage() {
                     setSearchParams={setSearchParams}
                 />
                 <ul className="products">
-                    {products.map(product => {
-                        return <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            price={product.price}
-                            photo={product.itemPhoto}
-                            shopName={product.shopName}
-                            shopImage={product.shopPicture}
-                        />
-                    })}
+                    {products.length > 0 ? (
+                        products.map(product => {
+                            return <ProductCard
+                                key={product.id}
+                                id={product.id}
+                                title={product.title}
+                                price={product.price}
+                                photo={product.itemPhoto}
+                                shopName={product.shopName}
+                                shopImage={product.shopPicture}
+                            />
+                        })
+                    ) : (
+                        <p>Oops! No matches found. Try tweaking your filters for more options!</p>
+                    )}
                 </ul>
                 <PageSelector
                     isFirstPage={isFirstPage}

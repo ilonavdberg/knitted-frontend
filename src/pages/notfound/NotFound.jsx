@@ -1,6 +1,9 @@
-import './NotFound.css'
-import PageLayout from "../../components/pagelayout/PageLayout.jsx";
+import './NotFound.css';
+
 import {Link} from "react-router-dom";
+
+import PageLayout from "../../components/pagelayout/PageLayout.jsx";
+
 
 function NotFound() {
     return (

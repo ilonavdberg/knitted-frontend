@@ -1,6 +1,9 @@
 import './ShopNavigation.css';
+
+import { FunnelSimple, SortAscending } from "@phosphor-icons/react";
+
 import Button from "@/components/button/Button.jsx";
-import {FunnelSimple, SortAscending} from "@phosphor-icons/react";
+
 
 function ShopNavigation({ changeContent }) {
     return (
