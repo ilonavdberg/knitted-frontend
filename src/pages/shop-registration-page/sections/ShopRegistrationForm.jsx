@@ -12,23 +12,20 @@ import Button from "@/components/button/Button.jsx";
 
 
 function ShopRegistrationForm() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { shop: userShop, login } = useContext(AuthContext);
     const [ errorMessage, setErrorMessage ] = useState("");
     const navigate = useNavigate();
 
     // automatically navigate to the shop after it is placed in the authContext
     useEffect(() => {
-        if (userShop) {
+        console.log("userShop inside ShopRegistrationForm: ", userShop);
+        if (typeof userShop?.id === 'number') {
             navigate(`/shop/${userShop.id}`);
         }
     }, [userShop])
 
     async function handleShopRegistration(data) {
-        console.log(userShop);
-        if (!userShop) {
-            setErrorMessage("You can only have one shop.");
-        }
 
         try {
             // create the new shop
@@ -46,11 +43,9 @@ function ShopRegistrationForm() {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 }
             })
-            console.log(response);
 
             // automatically login with updated roles and set shopId
             const token = response.headers.authorization.replace("Bearer ", "");
-            console.log("token: ", token);
             const shopId = response.data.id;
             login(token, shopId);
 
@@ -61,7 +56,7 @@ function ShopRegistrationForm() {
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit(handleShopRegistration)}>
             <fieldset className="shop-registration__form-subset">
                 <legend className="shop-registration__form-subset-title">Shop details</legend>
                 <label htmlFor="shop-name-field" className="shop-registration__form-question">
@@ -71,9 +66,21 @@ function ShopRegistrationForm() {
                         id="shop-name-field"
                         type="text"
                         size={30}
-                        {...register("name")}
+                        {...register("name", {
+                            required: "Shop name is a mandatory field",
+                            minLength: {
+                                value: 6,
+                                message: "Shop name must be at least 6 characters"
+                            },
+                            maxLength: {
+                                value: 30,
+                                message: "Shop name cannot exceed 30 characters"
+                            },
+                        })}
                     />
                 </label>
+                {errors.name && <p className="form__error-message">{errors.name.message}</p>}
+
                 <label htmlFor="shop-description-field" className="shop-registration__description">
                     Shop Description:
                     <textarea
@@ -81,9 +88,21 @@ function ShopRegistrationForm() {
                         id="shop-description-field"
                         cols="30"
                         rows="10"
-                        {...register("description")}
+                        {...register("description", {
+                            required: "Shop description is a mandatory field",
+                            minLength: {
+                                value: 50,
+                                message: "Shop description must be at least 50 characters"
+                            },
+                            maxLength: {
+                                value: 300,
+                                message: "Shop description cannot exceed 300 characters"
+                            },
+                        })}
                      />
                 </label>
+                {errors.description && <p className="form__error-message">{errors.description.message}</p>}
+
                 <label htmlFor="shop-picture-field" className="shop-registration__form-question">
                     Shop Picture:
                     <input
@@ -91,14 +110,17 @@ function ShopRegistrationForm() {
                         id="shop-picture-field"
                         type="file"
                         accept="image/*"
-                        {...register("image")}
+                        {...register("image", {
+                            required: "Image is required",
+                        })}
                     />
                 </label>
+                {errors.image && <p className="form__error-message">{errors.image.message}</p>}
             </fieldset>
 
             <div className="shop-registration__buttons">
                 <Button
-                    onClick={handleSubmit(handleShopRegistration)}
+                    type="submit"
                     skin="primary"
                 >
                     Register

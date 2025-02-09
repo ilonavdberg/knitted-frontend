@@ -48,7 +48,7 @@ function UserRegistrationForm() {
     }
     
     return (
-        <form className="user-registration__form">
+        <form onSubmit={handleSubmit(handleUserRegistration)} className="user-registration__form">
             <fieldset className="user-registration__form-subset">
                 <legend className="user-registration__form-subset-title">User account details</legend>
                 <label htmlFor="username-field" className="user-registration__form-question">
@@ -244,7 +244,7 @@ function UserRegistrationForm() {
 
             <div className="user-registration__buttons">
                 <Button
-                    onClick={handleSubmit(handleUserRegistration)}
+                    type="submit"
                     skin="primary"
                 >
                     Register

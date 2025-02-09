@@ -11,7 +11,7 @@ import Button from "@/components/button/Button.jsx";
 
 
 function ReviewForm({orderId}) {
-    const {register, handleSubmit, control, formState: { errors } } = useForm();
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
     async function handleReviewSubmit(data) {

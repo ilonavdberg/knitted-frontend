@@ -1,12 +1,12 @@
 import './Button.css';
 
-function Button({ onClick, disabled=false, skin, children }) {
+function Button({ onClick, disabled=false, type="button", skin, children }) {
     const classNames = `button ${skin ? `button--${skin}` : 'button--secondary'}`;
 
     return (
         <button
             className={classNames}
-            type="button"
+            type={type}
             onClick={onClick}
             disabled={disabled}
         >

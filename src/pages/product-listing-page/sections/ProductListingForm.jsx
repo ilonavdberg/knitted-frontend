@@ -25,8 +25,6 @@ function ProductListingForm({ product, productId }) {
     const subcategories = category ? subcategoriesData[category] : [];
 
     useEffect(() => {
-        console.log("Received product: ", product)
-        console.log("User shop: ", userShop);
         if (product) {
             setValue('title', product.title);
             setValue('description', product.description);
@@ -71,7 +69,6 @@ function ProductListingForm({ product, productId }) {
             });
         }
 
-        console.log("This is the data in the formData object: ");
         formData.forEach((value, key) => {
             console.log(`${key}:`, value);
         });
